@@ -34,31 +34,29 @@ public class Search {
 		Keywords regex = new Keywords();
 		String[] keys = regex.getKeywords();
 		for (int i =0; i < list.size(); i++){
-			//list.set(i, list.get(i).toString().replace("WIT", ""));
-			//list.set(i, list.get(i).toString().replace("C	", ""));
-			//list.set(i, list.get(i).toString().replace("NR	", ""));
 			for (int j =0; j < keys.length; j++){
 				list.set(i, list.get(i).toString().replace(keys[j], ""));
 				count++;
 			}
 		}
 	}
-	
+
 	/**
 	 * Finds entries in the WIT courses that match a room and day
 	 * @param room
 	 * @param day
 	 */
-	public void findEntries(String room, String[] day){
+	public void findEntries(String room, String[] day, int currentHour, int currentMinute){
 		trimEntries();
 		for (int i =0; i < list.size(); i++){
-			if (!list.get(i).toString().contains(room)){
+			String currentEntry = list.get(i).toString();
+			if (!currentEntry.contains(room)){
 				list.remove(i);
 				i--;
 			}else {
 				boolean hasDay = false;
 				for (int j = 0; j < day.length; j++){
-					if (list.get(i).toString().contains(day[j])){
+					if (currentEntry.contains(day[j])){
 						//cool
 						hasDay=true;
 					}
@@ -70,8 +68,27 @@ public class Search {
 			}
 			count++;
 		}
+
+		for(int i = 0; i < list.size(); i++) {
+			String currentEntry = list.get(i).toString();
+			//think I gotta toss those CRN #'s
+			int hourBefore = currentHour - 1;
+			//deals with case where the current hour is 1
+			if (hourBefore == 0) {
+				hourBefore = 12;
+			}
+			int colonLocation = currentEntry.indexOf(":");
+			//this should return the first instance
+			char[] firstTime = {currentEntry.charAt(colonLocation-2), currentEntry.charAt(colonLocation-1)};
+			int startHour = Character.getNumericValue(firstTime[0]) + Character.getNumericValue(firstTime[1]);
+			if (startHour < currentHour && startHour > currentHour - 2){
+				//potential problem
+				
+			}
+
+		}
 	}
-	
+
 	/**
 	 * Prints out entries that have matched
 	 */
