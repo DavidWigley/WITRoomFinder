@@ -17,7 +17,6 @@ public class Main {
 		search.findEntries("ANXCN 106", tuesday, currentHour, currentMinute);
 		search.returnEntries();
 		
-		//next trick is isolating times and realizing inbetween times. IE I want a room at 10:15 need to check 10 ams and 9's etc.
 	}
 
 }

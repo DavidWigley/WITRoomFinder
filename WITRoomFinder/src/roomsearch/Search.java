@@ -9,7 +9,6 @@ public class Search {
 	private File input;
 	private Scanner reader;
 	private ArrayList list = new ArrayList();
-	int count = 0;
 	public Search(){
 		input = new File("fall2015.txt");
 		try {
@@ -36,15 +35,14 @@ public class Search {
 		for (int i =0; i < list.size(); i++){
 			for (int j =0; j < keys.length; j++){
 				list.set(i, list.get(i).toString().replace(keys[j], ""));
-				count++;
 			}
 		}
 	}
 
 	/**
 	 * Finds entries in the WIT courses that match a room and day
-	 * @param room
-	 * @param day
+	 * @param room can search for specific room or just a building
+	 * @param day 
 	 */
 	public void findEntries(String room, String[] day, int currentHour, int currentMinute){
 		trimEntries();
@@ -66,7 +64,6 @@ public class Search {
 					i--;
 				}
 			}
-			count++;
 		}
 
 		for(int i = 0; i < list.size(); i++) {
@@ -107,7 +104,6 @@ public class Search {
 		for (int i =0; i < list.size(); i++){
 			System.out.println(list.get(i).toString());
 		}
-		System.out.println(count);
 	}
 
 
