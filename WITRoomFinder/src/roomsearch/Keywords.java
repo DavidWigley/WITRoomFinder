@@ -12,6 +12,7 @@ public class Keywords {
 			"TCRM	", "SOCL	", "SURV	", "TMGT	", "TWEL	"};
 	*/
 	
+	//all room numbers
 	String[] annexCentral = {"005", "007", "009", "012", "014", "101", "102", "103", "105", "106", "107", "108", "201", "202",
 			"203", "207", "209", "210", "301", "302", "305", "306", "307", "313", "314"};
 	String[] annexNorth = {"001", "003", "009", "103", "200"};
@@ -26,7 +27,8 @@ public class Keywords {
 	String[] rubenstein = {"005", "101", "103", "104", "105", "201"};
 	String[] willistonHall = {"001"};
 	String[] willisonHall = {"102", "103", "105"};
-	//essential
+	
+	//essential for trimming
 	String[] regex = {"WIT	"};
 	String[] mondayCases = {"	M"};
 	String[] tuesdayCases = {"	MT", "T	", "TR	","TF", "TW"}; //TF and TW are unique enough for me. That's why I don't include tab
