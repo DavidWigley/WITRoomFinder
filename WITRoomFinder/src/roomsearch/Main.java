@@ -15,7 +15,7 @@ public class Main {
 		search.getEntries();
 		//dynamically get room and day
 		search.findEntries("ANXCN 106", tuesday, currentHour, currentMinute);
-		search.returnEntries();
+		search.printEntries();
 		
 	}
 

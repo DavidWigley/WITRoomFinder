@@ -100,10 +100,25 @@ public class Search {
 	/**
 	 * Prints out entries that have matched
 	 */
-	public void returnEntries(){
+	public void printEntries(){
 		for (int i =0; i < list.size(); i++){
 			System.out.println(list.get(i).toString());
 		}
+	}
+	
+	public int getListSize(){
+		return list.size();
+	}
+	
+	public ArrayList getList() {
+		return list;
+	}
+	
+	public String getListStrings() {
+		for (int i =0; i < list.size(); i++){
+			return list.get(i).toString();
+		}
+		return null;
 	}
 
 
