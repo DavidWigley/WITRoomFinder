@@ -36,10 +36,17 @@
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/hour_message"
+        android:id="@+id/hourText" />
+
     <EditText android:id="@+id/hour_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/hour_message" />
+        android:hint="@string/hint" />
 
     <Button android:id="@+id/submit_button"
         android:layout_width="wrap_content"

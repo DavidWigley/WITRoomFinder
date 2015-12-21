@@ -14,8 +14,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.view.View.OnClickListener;
 
+import java.util.Calendar;
+
 
 public class MyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
+    public final static String HOUR_STRING = "HOUR_STRING";
+    public final static String MINUTE_STRING = "MINUTE_STRING";
+    public final static String BUILDING_STRING = "BUILDING_STRING";
+    public final static String DAY_STRING = "DAY_STRING";
 
     private Spinner buildingSpinner, daySpinner;
     private static final String[]buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
@@ -24,6 +31,8 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
     private EditText hourInput;
     private Button submit;
     String buildingChosen, dayChosen;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +44,60 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getApplicationContext(), ResultsActivity.class);
-                myIntent.putExtra("hourString", hourInput.getText().toString());
-                myIntent.putExtra("buildingString", buildingChosen);
-                myIntent.putExtra("dayString", dayChosen);
+                String hour, minute;
+                //deals with input box left blank. I leave it as an input so people can plan ahead
+                if(hourInput.getText().toString() == "" || hourInput.getText().toString() == null) {
+                    Calendar calendar = new Calendar() {
+                        @Override
+                        public void add(int field, int value) {
+
+                        }
+
+                        @Override
+                        protected void computeFields() {
+
+                        }
+
+                        @Override
+                        protected void computeTime() {
+
+                        }
+
+                        @Override
+                        public int getGreatestMinimum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getLeastMaximum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getMaximum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public int getMinimum(int field) {
+                            return 0;
+                        }
+
+                        @Override
+                        public void roll(int field, boolean increment) {
+
+                        }
+                    };
+                    hour = Integer.toString(calendar.get(Calendar.HOUR));
+                    minute = Integer.toString(calendar.get(Calendar.MINUTE));
+                }else{
+                    hour = hourInput.getText().toString();
+                    minute = "0";
+                }
+                myIntent.putExtra(HOUR_STRING, hour);
+                myIntent.putExtra(MINUTE_STRING, minute);
+                myIntent.putExtra(BUILDING_STRING, buildingChosen);
+                myIntent.putExtra(DAY_STRING, dayChosen);
                 startActivity(myIntent);
                 System.out.println("The button was pushed");
             }
