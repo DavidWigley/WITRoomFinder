@@ -21,6 +21,7 @@
         <activity
             android:name=".ResultsActivity"
             android:label="@string/title_activity_results"
+            android:parentActivityName=".MyActivity"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

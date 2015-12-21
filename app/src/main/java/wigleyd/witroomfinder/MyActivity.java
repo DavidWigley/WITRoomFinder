@@ -43,7 +43,7 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
         submit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(getApplicationContext(), ResultsActivity.class);
+                Intent myIntent = new Intent(getBaseContext(), ResultsActivity.class);
                 String hour, minute;
                 //deals with input box left blank. I leave it as an input so people can plan ahead
                 if(hourInput.getText().toString() == "" || hourInput.getText().toString() == null) {
@@ -94,12 +94,12 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
                     hour = hourInput.getText().toString();
                     minute = "0";
                 }
+                System.out.println("The hour string I am trying to send is: " + hour);
                 myIntent.putExtra(HOUR_STRING, hour);
                 myIntent.putExtra(MINUTE_STRING, minute);
                 myIntent.putExtra(BUILDING_STRING, buildingChosen);
                 myIntent.putExtra(DAY_STRING, dayChosen);
                 startActivity(myIntent);
-                System.out.println("The button was pushed");
             }
         });
 

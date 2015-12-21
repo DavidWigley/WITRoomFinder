@@ -1,23 +1,20 @@
 package wigleyd.witroomfinder;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
+import android.R.raw;
 
 public class Search {
 
-	private File input;
 	private Scanner reader;
 	private ArrayList list = new ArrayList();
 	private ArrayList results = new ArrayList();
-	public Search(){
-		input = new File("fall2015.txt");
-		try {
-			reader = new Scanner(input);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			System.out.println("Could not find the specified file");
-		}
+
+	public Search(InputStream input){
+		reader = new Scanner(input);
 	}
 
 	private void getEntries(){
@@ -35,6 +32,7 @@ public class Search {
 		String[] keys = regex.getKeywords();
 		for (int i =0; i < list.size(); i++){
 			for (int j =0; j < keys.length; j++){
+				//System.out.println("Currently looking at " + list.get(i).toString());
 				list.set(i, list.get(i).toString().replace(keys[j], ""));
 			}
 		}
@@ -188,6 +186,7 @@ public class Search {
 	public int getNumClassrooms() {
 		return results.size();
 	}
+
 
 
 }
