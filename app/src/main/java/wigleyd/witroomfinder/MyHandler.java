@@ -30,19 +30,19 @@ public class MyHandler {
 	 * @param input
 	 */
 	public void decipherDay(String input) {
-		if (input == "Monday") {
+		if (input.equalsIgnoreCase("Monday")) {
 			System.out.println("I set it to 1");
 			day = words.getMondayCases();
-		}else if (input == "Tuesday") {
+		}else if (input.equalsIgnoreCase("Tuesday")) {
 			System.out.println("I set it to 2");
 			day = words.getTuesdayCases();
-		}else if (input == "Wednesday") {
+		}else if (input.equalsIgnoreCase("Wednesday")) {
 			System.out.println("I set it to 3");
 			day = words.getWednesdayCases();
-		}else if (input == "Thursday") {
+		}else if (input.equalsIgnoreCase("Thursday")) {
 			System.out.println("I set it 4");
 			day = words.getThursdayCases();
-		}else if (input == "Friday"){
+		}else if (input.equalsIgnoreCase("Friday")){
 			System.out.println("I set it to 5");
 			day = words.getFridayCases();
 		}
