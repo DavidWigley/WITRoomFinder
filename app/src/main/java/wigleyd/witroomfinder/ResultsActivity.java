@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class ResultsActivity extends Activity {
 
@@ -38,10 +39,10 @@ public class ResultsActivity extends Activity {
         ll.setOrientation(LinearLayout.VERTICAL);
         MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
         sv.addView(ll);
-        for(int i = 0;i< myHandler.search.getNumClassrooms();i++){
-            System.out.println("I;m trying to add shit");
+        ArrayList results = myHandler.getResults();
+        for(int i = 0;i< results.size();i++){
             TextView tv = new TextView(this);
-            tv.setText(myHandler.search.getClassrooms());
+            tv.setText(results.get(i).toString());
             ll.addView(tv);
             //idea have the taken classrooms go red, open green
         }

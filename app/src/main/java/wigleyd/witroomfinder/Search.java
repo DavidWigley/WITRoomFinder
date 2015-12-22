@@ -37,7 +37,10 @@ public class Search {
 			}
 		}
 	}
-
+	private void printMessage(int i) {
+//		System.out.println("Just removed this entry:");
+//		System.out.println(list.get(i));
+	}
 	/**
 	 * Finds entries in the WIT courses that match a room and day.
 	 * The logic is setup so it will remove items from the list that are in different buildings, days, or at different times
@@ -65,6 +68,7 @@ public class Search {
 				}
 			}
 			if(tripped) {
+				printMessage(i);
 				list.remove(i);
 				i--;
 				tripped = false;
@@ -129,6 +133,7 @@ public class Search {
 				tripped = true;
 			}
 			if (tripped) {
+				printMessage(i);
 				list.remove(i);
 				i--;
 				tripped = false;
@@ -151,6 +156,7 @@ public class Search {
 				}
 			}
 			if(tripped == true){
+				printMessage(i);
 				results.remove(i);
 				i--;
 				tripped = false;
@@ -181,6 +187,10 @@ public class Search {
 			return results.get(i).toString();
 		}
 		return null;
+	}
+
+	public ArrayList getResultsList() {
+		return results;
 	}
 
 	public int getNumClassrooms() {
