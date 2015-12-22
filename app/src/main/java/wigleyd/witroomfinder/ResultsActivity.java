@@ -40,6 +40,10 @@ public class ResultsActivity extends Activity {
         MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
         sv.addView(ll);
         ArrayList results = myHandler.getResults();
+        TextView firstBox = new TextView(this);
+        firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
+            "at " +hour + ":" + minute);
+        ll.addView(firstBox);
         for(int i = 0;i< results.size();i++){
             TextView tv = new TextView(this);
             tv.setText(results.get(i).toString());
