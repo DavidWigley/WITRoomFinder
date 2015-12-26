@@ -21,7 +21,6 @@ public class MyHandler {
 		fixStrings();
 		performSearch();
 		getUpdatedListings();
-		//search.printEntries();
 	}
 
 	public void performSearch() {
@@ -75,8 +74,8 @@ public class MyHandler {
 	}
 
 	/**
-	 * This is good.
-	 * @param input
+	 * This takes the day input and matches it to the arrays in keywords. Vital for searching.
+	 * @param input is the day passed in from the Activity ResultsActivity
 	 */
 	public void decipherDay(String input) {
 		if (input.equalsIgnoreCase("Monday")) {
@@ -90,16 +89,8 @@ public class MyHandler {
 		}else if (input.equalsIgnoreCase("Friday")){
 			day = words.getFridayCases();
 		}
-
 	}
 
-	public Keywords getKeywords() {
-		return words;
-	}
-
-	public Search getSearch() {
-		return search;
-	}
 	public ArrayList getResults(){
 		return search.getResults();
 	}

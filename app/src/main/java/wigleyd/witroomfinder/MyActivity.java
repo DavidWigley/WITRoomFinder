@@ -94,7 +94,6 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
                     hour = hourInput.getText().toString();
                     minute = "0";
                 }
-                //System.out.println("The hour string I am trying to send is: " + hour);
                 myIntent.putExtra(HOUR_STRING, hour);
                 myIntent.putExtra(MINUTE_STRING, minute);
                 myIntent.putExtra(BUILDING_STRING, buildingChosen);

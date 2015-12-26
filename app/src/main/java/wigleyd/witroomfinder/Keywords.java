@@ -1,16 +1,6 @@
 package wigleyd.witroomfinder;
 
 public class Keywords {
-	/*unnecessary. It's cleaner but much less efficient.
-	String[] regex = {"C	", "NR	","WIT	","ARCH	","BIOL	","BMED	", "BLDG	",
-			"TBAN	", "CHEM	", "CIVE	", "COMM	", "COMP ", "TCON	",
-			"CONM	", "TCMC	", "COOP	", "DSGN	", "ETHS	", "ECON	",
-			"ELMC	", "ELEC	", "ENGR	", "ENGL	", "FMGT	", "TFMC	",
-			"FYS	", "HIST	", "HUMN	", "INDS	", "INTD	", "TJEC	",
-			"LITR	", "TMTO	", "MGMT	", "MANF	", "MATH	", "MECH	",
-			"TCAD	", "PHIL	", "PHYS	", "POLS	", "TPMC	", "PSYC	",
-			"TCRM	", "SOCL	", "SURV	", "TMGT	", "TWEL	"};
-	*/
 	//I know this is super gross but its needed.
 	String[] annexCentral = {"ANXCN 005", "ANXCN 007", "ANXCN 009", "ANXCN 012", "ANXCN 014", "ANXCN 101", "ANXCN 102", "ANXCN 103",
 			"ANXCN 105", "ANXCN 106", "ANXCN 107", "ANXCN 108", "ANXCN 201", "ANXCN 202", "ANXCN 203", "ANXCN 207", "ANXCN 209", 

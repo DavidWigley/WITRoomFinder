@@ -15,11 +15,9 @@ public class Search {
 	}
 
 	private void getEntries(){
-		int count =0;
 		while(reader.hasNextLine()){
 			//adds all the elements in the text file to the array conflictList
 			conflictList.add(reader.nextLine());
-			count++;
 		}
 	}
 
@@ -108,7 +106,7 @@ public class Search {
 					String timeMinute = Character.toString(minuteTime[0]) + Character.toString(minuteTime[1]);
 					int endMinute = Integer.parseInt(timeMinute);
 					if (currentMinute >= endMinute) {
-						//no class so I remove it from my conflicts
+						//No class going on, its ended. I remove it from my conflicts
 						tripped = true;
 					}
 				}else {
@@ -145,7 +143,7 @@ public class Search {
 	}
 
 	/**
-	 * Prints out entries that have matched
+	 * Prints out entries that have matched. Used for debugging.
 	 */
 	public void printEntries(){
 		for (int i =0; i < results.size(); i++){

@@ -4,11 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.renderscript.ScriptGroup;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -46,6 +44,9 @@ public class ResultsActivity extends Activity {
         if (minute == 0) {
             extra = "0";
         }
+        if (hour >=13) {
+            hour-=12;
+        }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
                 "at " + hour + ":" + minute + extra);
         ll.addView(firstBox);
@@ -68,13 +69,7 @@ public class ResultsActivity extends Activity {
             tv.setText(allClassrooms.get(i).toString());
             ll.addView(tv);
         }
-//        for(int i = 0;i< results.size();i++){
-//            TextView tv = new TextView(this);
-//            //tv.setBackgroundResource(R.color.solid_red);
-//            tv.setText(results.get(i).toString());
-//            ll.addView(tv);
-//            //idea have the taken classrooms go red, open green
-//        }
+
         this.setContentView(sv);
 
     }
