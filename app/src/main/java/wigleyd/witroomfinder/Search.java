@@ -1,27 +1,29 @@
 package wigleyd.witroomfinder;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
-import android.R.raw;
 
 public class Search {
 
+	private File input;
 	private Scanner reader;
 	private ArrayList list = new ArrayList();
-	private ArrayList results = new ArrayList();
+	public ArrayList results = new ArrayList();
 
 	public Search(InputStream input){
 		reader = new Scanner(input);
 	}
 
 	private void getEntries(){
+		int count =0;
 		while(reader.hasNextLine()){
-			//adds all the elementss in the text file to the array list
+			//adds all the elements in the text file to the array list
 			list.add(reader.nextLine());
+			count++;
 		}
+		System.out.println("Added this many lines " + count);
 	}
 
 	/**
@@ -32,15 +34,11 @@ public class Search {
 		String[] keys = regex.getKeywords();
 		for (int i =0; i < list.size(); i++){
 			for (int j =0; j < keys.length; j++){
-				//System.out.println("Currently looking at " + list.get(i).toString());
 				list.set(i, list.get(i).toString().replace(keys[j], ""));
 			}
 		}
 	}
-	private void printMessage(int i) {
-//		System.out.println("Just removed this entry:");
-//		System.out.println(list.get(i));
-	}
+
 	/**
 	 * Finds entries in the WIT courses that match a room and day.
 	 * The logic is setup so it will remove items from the list that are in different buildings, days, or at different times
@@ -50,25 +48,25 @@ public class Search {
 	public void findEntries(String room, String[] day, int currentHour, int currentMinute){
 		getEntries();
 		trimEntries();
+		System.out.println("THE ROOM I WAS PASSED WAS: " + room);
 		boolean tripped = false;
 		for (int i =0; i < list.size(); i++){
 			String currentEntry = list.get(i).toString();
 			if (!currentEntry.contains(room)){
 				tripped = true;
+				System.out.println(list.get(i).toString() + "tripped ln 56");
 			}else {
 				boolean hasDay = false;
 				for (int j = 0; j < day.length; j++){
 					if (currentEntry.contains(day[j])){
-						//cool
 						hasDay=true;
 					}
 				}
 				if (hasDay == false){
-					tripped = true;
+					System.out.println(list.get(i).toString() + "tripped ln 65");
 				}
 			}
 			if(tripped) {
-				printMessage(i);
 				list.remove(i);
 				i--;
 				tripped = false;
@@ -125,22 +123,31 @@ public class Search {
 					}else {
 						//no class
 						tripped = true;
+						System.out.println(list.get(i).toString() + "tripped ln 125");
 					}
 				}else {
 					tripped = true;
+					System.out.println(list.get(i).toString() + "tripped ln 129");
 				}
 			}else {
 				tripped = true;
+				System.out.println(list.get(i).toString() + "tripped ln 133");
 			}
 			if (tripped) {
-				printMessage(i);
 				list.remove(i);
 				i--;
 				tripped = false;
 			}
 		}
+		printMe();
 	}
-
+	//YO THE BUG IS THE LIST DOESNT CONTAIN ANYTHING. LIST NOT RESULTS
+	public void printMe(){
+		for (int i =0; i < list.size(); i ++) {
+			System.out.println("I have a list containing this " + list.get(i).toString());
+		}
+		System.out.println("BREAK");
+	}
 	public void updateListings(String[] rooms) {
 		for (int i =0; i< rooms.length; i++) {
 			results.add(rooms[i]);
@@ -150,13 +157,13 @@ public class Search {
 		for (int i =0; i <results.size(); i++){
 			for (int j =0; j < list.size(); j++) {
 				if (list.get(j).toString().contains(results.get(i).toString())){
-					//System.out.println("The item: " + list.get(j).toString());
-					//System.out.println("Contains: " + results.get(i).toString());
+					System.out.println("The item: " + list.get(j).toString());
+					System.out.println("Contains: " + results.get(i).toString());
 					tripped = true;
 				}
 			}
 			if(tripped == true){
-				printMessage(i);
+				System.out.println("These match");
 				results.remove(i);
 				i--;
 				tripped = false;
@@ -182,21 +189,15 @@ public class Search {
 		return list;
 	}
 
-	public String getClassrooms() {
-		for (int i =0; i < results.size(); i++){
-			return results.get(i).toString();
+	public String getListStrings() {
+		for (int i =0; i < list.size(); i++){
+			return list.get(i).toString();
 		}
 		return null;
 	}
-
-	public ArrayList getResultsList() {
+	public ArrayList getResults() {
 		return results;
 	}
-
-	public int getNumClassrooms() {
-		return results.size();
-	}
-
 
 
 }
