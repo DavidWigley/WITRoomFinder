@@ -41,8 +41,12 @@ public class ResultsActivity extends Activity {
         sv.addView(ll);
         ArrayList results = myHandler.getResults();
         TextView firstBox = new TextView(this);
+        String extra = "";
+        if (minute == 0) {
+            extra = "0";
+        }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
-            "at " +hour + ":" + minute);
+            "at " +hour + ":" + minute + extra);
         ll.addView(firstBox);
         for(int i = 0;i< results.size();i++){
             TextView tv = new TextView(this);
