@@ -1,6 +1,4 @@
 package wigleyd.witroomfinder;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -8,7 +6,7 @@ import java.util.Scanner;
 public class Search {
 
 	private Scanner reader;
-	private ArrayList list = new ArrayList();
+	private ArrayList conflictList = new ArrayList();
 	public ArrayList results = new ArrayList();
 	private ArrayList allClassrooms = new ArrayList();
 
@@ -19,8 +17,8 @@ public class Search {
 	private void getEntries(){
 		int count =0;
 		while(reader.hasNextLine()){
-			//adds all the elements in the text file to the array list
-			list.add(reader.nextLine());
+			//adds all the elements in the text file to the array conflictList
+			conflictList.add(reader.nextLine());
 			count++;
 		}
 	}
@@ -31,16 +29,16 @@ public class Search {
 	private void trimEntries(){
 		Keywords regex = new Keywords();
 		String[] keys = regex.getKeywords();
-		for (int i =0; i < list.size(); i++){
+		for (int i =0; i < conflictList.size(); i++){
 			for (int j =0; j < keys.length; j++){
-				list.set(i, list.get(i).toString().replace(keys[j], ""));
+				conflictList.set(i, conflictList.get(i).toString().replace(keys[j], ""));
 			}
 		}
 	}
 
 	/**
 	 * Finds entries in the WIT courses that match a room and day.
-	 * The logic is setup so it will remove items from the list that are in different buildings, days, or at different times
+	 * The logic is setup so it will remove items from the conflictList that are in different buildings, days, or at different times
 	 * @param room can search for specific room or just a building
 	 * @param day 
 	 */
@@ -48,8 +46,8 @@ public class Search {
 		getEntries();
 		trimEntries();
 		boolean tripped = false;
-		for (int i =0; i < list.size(); i++){
-			String currentEntry = list.get(i).toString();
+		for (int i =0; i < conflictList.size(); i++){
+			String currentEntry = conflictList.get(i).toString();
 			if (!currentEntry.contains(room)){
 				tripped = true;
 			}else {
@@ -60,17 +58,18 @@ public class Search {
 					}
 				}
 				if (hasDay == false){
+					tripped = true;
 				}
 			}
 			if(tripped) {
-				list.remove(i);
+				conflictList.remove(i);
 				i--;
 				tripped = false;
 			}
 		}
 		tripped = false;
-		for(int i = 0; i < list.size(); i++) {
-			String currentEntry = list.get(i).toString();
+		for(int i = 0; i < conflictList.size(); i++) {
+			String currentEntry = conflictList.get(i).toString();
 			if (currentHour >=13) {
 				//deals with times past 12
 				currentHour-=12;
@@ -89,35 +88,27 @@ public class Search {
 			if (time2.startsWith(" ")){
 				time2 = Character.toString(secondTime[1]);
 			}
-			//System.out.println("I'm on this entry: " + list.get(i).toString());
+			//System.out.println("I'm on this entry: " + conflictList.get(i).toString());
 
 			int startHour = Integer.parseInt(time);
 			int endHour = Integer.parseInt(time2);
 			int delta = (endHour - startHour);
-			if (startHour <=12 && endHour >=1 && endHour < startHour) {
+			if (startHour <= 12 && endHour >=1 && endHour < startHour) {
 				//basically it went past 1 so I put it in military time to get a clean subtraction
-				delta = endHour+12 - startHour;
+				delta = endHour + 12 - startHour;
 			}
 			delta++;
 			//add one because most classes end at 50, or 45 so Ill just round
-			//System.out.println("The start time was: " + startHour);
-			//System.out.println("The current time is: " + currentHour);
 			if (startHour <= currentHour && startHour >= currentHour - delta){
-				//System.out.println("Logic holds");
 				//a class started around this time
-				//System.out.println("The end time was: " + endHour);
 				if (endHour >= currentHour){
-					//theres a class going on at the same hour. It has not ended yet. So I keep it in the list. 
+					//theres a class going on at the same hour. It has not ended yet. So I keep it in the conflictList.
 					//Unfortunately this means that a 9:50 class wont flag at 9. So we do a minute check
 					char[] minuteTime = {currentEntry.charAt(colonLocation+10), currentEntry.charAt(colonLocation+11)};
 					String timeMinute = Character.toString(minuteTime[0]) + Character.toString(minuteTime[1]);
 					int endMinute = Integer.parseInt(timeMinute);
-					//System.out.println("The end minute for this class is: " + endMinute);
-					if (currentMinute < endMinute) {
-						//theres a class going on for sure
-						//System.out.println("There is a class going on");
-					}else {
-						//no class
+					if (currentMinute >= endMinute) {
+						//no class so I remove it from my conflicts
 						tripped = true;
 					}
 				}else {
@@ -127,7 +118,7 @@ public class Search {
 				tripped = true;
 			}
 			if (tripped) {
-				list.remove(i);
+				conflictList.remove(i);
 				i--;
 				tripped = false;
 			}
@@ -140,8 +131,8 @@ public class Search {
 		}
 		boolean tripped = false;
 		for (int i =0; i <results.size(); i++){
-			for (int j =0; j < list.size(); j++) {
-				if (list.get(j).toString().contains(results.get(i).toString())){
+			for (int j =0; j < conflictList.size(); j++) {
+				if (conflictList.get(j).toString().contains(results.get(i).toString())){
 					tripped = true;
 				}
 			}
@@ -157,26 +148,11 @@ public class Search {
 	 * Prints out entries that have matched
 	 */
 	public void printEntries(){
-		System.out.println("The resulting classrooms are as follows");
 		for (int i =0; i < results.size(); i++){
 			System.out.println(results.get(i).toString());
 		}
 	}
 
-	public int getListSize(){
-		return list.size();
-	}
-
-	public ArrayList getList() {
-		return list;
-	}
-
-	public String getListStrings() {
-		for (int i =0; i < list.size(); i++){
-			return list.get(i).toString();
-		}
-		return null;
-	}
 	public ArrayList getResults() {
 		return results;
 	}
