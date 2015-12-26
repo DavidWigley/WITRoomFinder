@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WITRoomFinder</string>
+    <string name="app_name">WIT Room Finder</string>
     <string name="action_settings">Settings</string>
     <string name="hour_message">Please type the current hour in military time that you want to check. Leave blank for current. Ex: 4pm is 16</string>
     <string name="hint">Input here</string>

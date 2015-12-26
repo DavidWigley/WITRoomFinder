@@ -26,7 +26,6 @@ public class MyHandler {
 
 	public void performSearch() {
 		search.findEntries(buildingPass, day, currentHour, currentMinute);
-		System.out.println("Just ran the search");
 	}
 
 	public void fixStrings() {

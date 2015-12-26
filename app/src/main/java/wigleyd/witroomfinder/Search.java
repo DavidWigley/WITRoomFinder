@@ -71,11 +71,11 @@ public class Search {
 		tripped = false;
 		for(int i = 0; i < list.size(); i++) {
 			String currentEntry = list.get(i).toString();
-			int hourBefore = currentHour - 1;
-			//deals with case where the current hour is 1
-			if (hourBefore == 0) {
-				hourBefore = 12;
+			if (currentHour >=13) {
+				//deals with times past 12
+				currentHour-=12;
 			}
+
 			int colonLocation = currentEntry.indexOf(":");
 			//this should return the first instance of the colon
 			char[] firstTime = {currentEntry.charAt(colonLocation-2), currentEntry.charAt(colonLocation-1)};
@@ -142,13 +142,10 @@ public class Search {
 		for (int i =0; i <results.size(); i++){
 			for (int j =0; j < list.size(); j++) {
 				if (list.get(j).toString().contains(results.get(i).toString())){
-					//System.out.println("The item: " + list.get(j).toString());
-					//System.out.println("Contains: " + results.get(i).toString());
 					tripped = true;
 				}
 			}
 			if(tripped == true){
-				System.out.println("These match");
 				results.remove(i);
 				i--;
 				tripped = false;
