@@ -21,21 +21,14 @@ public class MyHandler {
 		fixStrings();
 		performSearch();
 		getUpdatedListings();
-		search.printEntries();
+		//search.printEntries();
 	}
 
 	public void performSearch() {
 		search.findEntries(buildingPass, day, currentHour, currentMinute);
 		System.out.println("Just ran the search");
 	}
-//	public String getClassrooms() {
-//		return search.getClassrooms();
-//	}
 
-//	public ArrayList getResults(){
-//		return getSearch().getResultsList();
-//		//search.getResultsList()
-//	}
 	public void fixStrings() {
 		if (building.equalsIgnoreCase(buildingChoices[0])) {
 			buildingPass = "ANXCN";
@@ -110,6 +103,9 @@ public class MyHandler {
 	}
 	public ArrayList getResults(){
 		return search.getResults();
+	}
+	public ArrayList getAllClassrooms() {
+		return search.getAllClassrooms();
 	}
 
 }

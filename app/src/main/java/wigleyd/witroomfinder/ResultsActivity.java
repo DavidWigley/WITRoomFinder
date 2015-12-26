@@ -40,20 +40,41 @@ public class ResultsActivity extends Activity {
         MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
         sv.addView(ll);
         ArrayList results = myHandler.getResults();
+        ArrayList allClassrooms = myHandler.getAllClassrooms();
         TextView firstBox = new TextView(this);
         String extra = "";
         if (minute == 0) {
             extra = "0";
         }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
-            "at " +hour + ":" + minute + extra);
+                "at " + hour + ":" + minute + extra);
         ll.addView(firstBox);
-        for(int i = 0;i< results.size();i++){
+        for (int i =0; i < allClassrooms.size(); i++) {
+            int color = 0;
+            for (int j = 0; j < results.size(); j++){
+                color = 0;
+                if (allClassrooms.get(i).toString().contains(results.get(j).toString())){
+                    //its open
+                    color = R.color.green;
+                    break;
+                }else if (!allClassrooms.get(i).toString().contains(results.get(j).toString()) &&
+                        color != R.color.green) {
+                    //its closed
+                    color = R.color.red;
+                }
+            }
             TextView tv = new TextView(this);
-            tv.setText(results.get(i).toString());
+            tv.setBackgroundResource(color);
+            tv.setText(allClassrooms.get(i).toString());
             ll.addView(tv);
-            //idea have the taken classrooms go red, open green
         }
+//        for(int i = 0;i< results.size();i++){
+//            TextView tv = new TextView(this);
+//            //tv.setBackgroundResource(R.color.solid_red);
+//            tv.setText(results.get(i).toString());
+//            ll.addView(tv);
+//            //idea have the taken classrooms go red, open green
+//        }
         this.setContentView(sv);
 
     }

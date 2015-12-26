@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 public class Search {
 
-	private File input;
 	private Scanner reader;
 	private ArrayList list = new ArrayList();
 	public ArrayList results = new ArrayList();
+	private ArrayList allClassrooms = new ArrayList();
 
 	public Search(InputStream input){
 		reader = new Scanner(input);
@@ -23,7 +23,6 @@ public class Search {
 			list.add(reader.nextLine());
 			count++;
 		}
-		System.out.println("Added this many lines " + count);
 	}
 
 	/**
@@ -48,13 +47,11 @@ public class Search {
 	public void findEntries(String room, String[] day, int currentHour, int currentMinute){
 		getEntries();
 		trimEntries();
-		System.out.println("THE ROOM I WAS PASSED WAS: " + room);
 		boolean tripped = false;
 		for (int i =0; i < list.size(); i++){
 			String currentEntry = list.get(i).toString();
 			if (!currentEntry.contains(room)){
 				tripped = true;
-				System.out.println(list.get(i).toString() + "tripped ln 56");
 			}else {
 				boolean hasDay = false;
 				for (int j = 0; j < day.length; j++){
@@ -63,7 +60,6 @@ public class Search {
 					}
 				}
 				if (hasDay == false){
-					System.out.println(list.get(i).toString() + "tripped ln 65");
 				}
 			}
 			if(tripped) {
@@ -119,19 +115,16 @@ public class Search {
 					//System.out.println("The end minute for this class is: " + endMinute);
 					if (currentMinute < endMinute) {
 						//theres a class going on for sure
-						System.out.println("There is a class going on");
+						//System.out.println("There is a class going on");
 					}else {
 						//no class
 						tripped = true;
-						System.out.println(list.get(i).toString() + "tripped ln 125");
 					}
 				}else {
 					tripped = true;
-					System.out.println(list.get(i).toString() + "tripped ln 129");
 				}
 			}else {
 				tripped = true;
-				System.out.println(list.get(i).toString() + "tripped ln 133");
 			}
 			if (tripped) {
 				list.remove(i);
@@ -139,26 +132,18 @@ public class Search {
 				tripped = false;
 			}
 		}
-		printMe();
-	}
-	//YO THE BUG IS THE LIST DOESNT CONTAIN ANYTHING. LIST NOT RESULTS
-	public void printMe(){
-		for (int i =0; i < list.size(); i ++) {
-			System.out.println("I have a list containing this " + list.get(i).toString());
-		}
-		System.out.println("BREAK");
 	}
 	public void updateListings(String[] rooms) {
 		for (int i =0; i< rooms.length; i++) {
 			results.add(rooms[i]);
+			allClassrooms.add(rooms[i]);
 		}
 		boolean tripped = false;
-		int tripCounter = 0;
 		for (int i =0; i <results.size(); i++){
 			for (int j =0; j < list.size(); j++) {
 				if (list.get(j).toString().contains(results.get(i).toString())){
-					System.out.println("The item: " + list.get(j).toString());
-					System.out.println("Contains: " + results.get(i).toString());
+					//System.out.println("The item: " + list.get(j).toString());
+					//System.out.println("Contains: " + results.get(i).toString());
 					tripped = true;
 				}
 			}
@@ -197,6 +182,9 @@ public class Search {
 	}
 	public ArrayList getResults() {
 		return results;
+	}
+	public ArrayList getAllClassrooms() {
+		return allClassrooms;
 	}
 
 
