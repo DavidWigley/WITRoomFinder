@@ -9,13 +9,13 @@ public class Main {
 		String[] wednesday = words.getWednesdayCases();
 		String[] thursday = words.getThursdayCases();
 		String[] friday = words.getFridayCases();
-		int currentHour = 10;
+		int currentHour = 12;
 		int currentMinute = 0;
 		Search search = new Search();
-		search.getEntries();
 		//dynamically get room and day
-		search.findEntries("ANXCN 106", tuesday, currentHour, currentMinute);
-		search.returnEntries();
+		search.findEntries("ANXCN", tuesday, currentHour, currentMinute);
+		search.updateListings(words.annexCentral);
+		search.printEntries();
 		
 	}
 
