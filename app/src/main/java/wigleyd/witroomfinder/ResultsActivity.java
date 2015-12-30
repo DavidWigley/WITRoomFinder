@@ -21,7 +21,8 @@ public class ResultsActivity extends Activity {
         manager = getAssets();
         InputStream inputStream = null;
         try {
-            inputStream = manager.open("fall2015.txt");
+            //inputStream = manager.open("fall2015.txt");
+            inputStream = manager.open("spring2016.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
