@@ -49,7 +49,7 @@ public class ResultsActivity extends Activity {
             hour-=12;
         }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
-                "at " + hour + ":" + minute + extra);
+                " at " + hour + ":" + minute + extra);
         ll.addView(firstBox);
         for (int i =0; i < allClassrooms.size(); i++) {
             int color = 0;
