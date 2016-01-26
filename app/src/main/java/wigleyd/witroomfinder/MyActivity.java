@@ -51,13 +51,13 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
                 if (hourInput.getText().toString().trim().length() == 0) {
                     hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
                     System.out.println("Tried to set hour to: " + calendar.get(Calendar.HOUR_OF_DAY));
-                    //minute = Integer.toString(calendar.get(Calendar.MINUTE));
+                    minute = Integer.toString(calendar.get(Calendar.MINUTE));
                 }else {
                     hour = hourInput.getText().toString();
                     minute = "0";
                 }
                 //theres a bug with the minute not being 0. it fucks up the logic. Damn it
-                minute="0";
+                //minute="0";
                 myIntent.putExtra(HOUR_STRING, hour);
                 myIntent.putExtra(MINUTE_STRING, minute);
                 myIntent.putExtra(BUILDING_STRING, buildingChosen);
