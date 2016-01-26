@@ -38,7 +38,7 @@ public class MyHandler {
 			buildingPass = "ANXSO";
 			stringToUpdate = words.annexSouth;
 		}else if (building.equalsIgnoreCase(buildingChoices[3])){
-			buildingPass = "BEATTY";
+			buildingPass = "BEATT";
 			stringToUpdate = words.beatty;
 		}else if (building.equalsIgnoreCase(buildingChoices[4])){
 			buildingPass = "DOBBS";
