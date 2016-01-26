@@ -42,14 +42,15 @@ public class ResultsActivity extends Activity {
         ArrayList allClassrooms = myHandler.getAllClassrooms();
         TextView firstBox = new TextView(this);
         String extra = "";
-        if (minute == 0) {
+        //handles case when there is not an additional 0 following the minute. Fixes the format.
+        if (minute < 10) {
             extra = "0";
         }
         if (hour >=13) {
             hour-=12;
         }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
-                "at " + hour + ":" + minute + extra);
+                " at " + hour + ":" + extra + minute);
         ll.addView(firstBox);
         for (int i =0; i < allClassrooms.size(); i++) {
             int color = 0;

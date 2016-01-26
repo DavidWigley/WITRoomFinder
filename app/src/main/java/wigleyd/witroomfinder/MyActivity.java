@@ -17,7 +17,7 @@ import android.view.View.OnClickListener;
 import java.util.Calendar;
 
 
-public class MyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class MyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     public final static String HOUR_STRING = "HOUR_STRING";
     public final static String MINUTE_STRING = "MINUTE_STRING";
@@ -25,9 +25,9 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
     public final static String DAY_STRING = "DAY_STRING";
 
     private Spinner buildingSpinner, daySpinner;
-    private static final String[]buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
-    "Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willison Hall", "Williston Hall"};
-    private static final String[]days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    private static final String[] buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
+            "Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willison Hall", "Williston Hall"};
+    private static final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     private EditText hourInput;
     private Button submit;
     String buildingChosen, dayChosen;
@@ -46,54 +46,18 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
                 Intent myIntent = new Intent(getBaseContext(), ResultsActivity.class);
                 String hour, minute;
                 //deals with input box left blank. I leave it as an input so people can plan ahead
-                if(hourInput.getText().toString() == "" || hourInput.getText().toString() == null) {
-                    Calendar calendar = new Calendar() {
-                        @Override
-                        public void add(int field, int value) {
-
-                        }
-
-                        @Override
-                        protected void computeFields() {
-
-                        }
-
-                        @Override
-                        protected void computeTime() {
-
-                        }
-
-                        @Override
-                        public int getGreatestMinimum(int field) {
-                            return 0;
-                        }
-
-                        @Override
-                        public int getLeastMaximum(int field) {
-                            return 0;
-                        }
-
-                        @Override
-                        public int getMaximum(int field) {
-                            return 0;
-                        }
-
-                        @Override
-                        public int getMinimum(int field) {
-                            return 0;
-                        }
-
-                        @Override
-                        public void roll(int field, boolean increment) {
-
-                        }
-                    };
-                    hour = Integer.toString(calendar.get(Calendar.HOUR));
+                Calendar calendar = Calendar.getInstance();
+                System.out.println("trying to use current time of: " + Calendar.HOUR_OF_DAY);
+                if (hourInput.getText().toString().trim().length() == 0) {
+                    hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
+                    System.out.println("Tried to set hour to: " + calendar.get(Calendar.HOUR_OF_DAY));
                     minute = Integer.toString(calendar.get(Calendar.MINUTE));
-                }else{
+                }else {
                     hour = hourInput.getText().toString();
                     minute = "0";
                 }
+                //theres a bug with the minute not being 0. it fucks up the logic. Damn it
+                //minute="0";
                 myIntent.putExtra(HOUR_STRING, hour);
                 myIntent.putExtra(MINUTE_STRING, minute);
                 myIntent.putExtra(BUILDING_STRING, buildingChosen);
@@ -102,13 +66,13 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
             }
         });
 
-        buildingSpinner = (Spinner)findViewById(R.id.building_spinner);
-        ArrayAdapter<String>adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,buildings);
+        buildingSpinner = (Spinner) findViewById(R.id.building_spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, buildings);
 
-        daySpinner = (Spinner)findViewById(R.id.day_spinner);
-        ArrayAdapter<String>dayAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item,days);
+        daySpinner = (Spinner) findViewById(R.id.day_spinner);
+        ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, days);
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         buildingSpinner.setAdapter(adapter);

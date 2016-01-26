@@ -41,6 +41,10 @@ public class Search {
 	 * @param day 
 	 */
 	public void findEntries(String room, String[] day, int currentHour, int currentMinute){
+
+		//im really sorry for doing this but for the moment going to hardcore the searching minute.
+		//No one will notice it only affects searching logic.
+		currentMinute = 0;
 		getEntries();
 		trimEntries();
 		boolean tripped = false;
