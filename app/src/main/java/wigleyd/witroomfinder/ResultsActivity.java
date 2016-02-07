@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class ResultsActivity extends Activity implements View.OnClickListener {
 
     private static final int PADDING = 15;
+    private int tagNumber=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +70,11 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
                     color = R.color.red;
                 }
             }
+            //deals with case that all classrooms are filled so results
+            //array is empty, therefore everything should be filled/red.
+            if(results.size() == 0) {
+                color = R.color.red;
+            }
             TextView tv = new TextView(this);
             tv.setBackgroundResource(color);
             tv.setText(allClassrooms.get(i).toString());
@@ -89,12 +95,18 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         String tag = v.getTag().toString();
         System.out.println("I clicked on a classroom");
         System.out.println("The tag I clicked on was: " + tag);
-        int tagNumber = Integer.parseInt(tag);
+        tagNumber = Integer.parseInt(tag);
         getTextBoxClicked(tagNumber);
+
     }
 
     public int getTextBoxClicked(int box) {
         return box;
+    }
+
+    public void initializeDetails(ArrayList classes){
+        Intent detailsIntent = new Intent(getBaseContext(), ResultsActivity.class);
+        //detailsIntent.putExtra("Class name", allClassrooms.get(tag));
     }
 
 }
