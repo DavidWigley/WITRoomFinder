@@ -42,7 +42,7 @@ public class Search {
 	 */
 	public void findEntries(String room, String[] day, int currentHour, int currentMinute){
 
-		//im really sorry for doing this but for the moment going to hardcore the searching minute.
+		//im really sorry for doing this but for the moment going to hardcode the searching minute.
 		//No one will notice it only affects searching logic.
 		currentMinute = 0;
 		getEntries();
@@ -72,11 +72,6 @@ public class Search {
 		tripped = false;
 		for(int i = 0; i < conflictList.size(); i++) {
 			String currentEntry = conflictList.get(i).toString();
-			if (currentHour >=13) {
-				//deals with times past 12
-				currentHour-=12;
-			}
-
 			int colonLocation = currentEntry.indexOf(":");
 			//this should return the first instance of the colon
 			char[] firstTime = {currentEntry.charAt(colonLocation-2), currentEntry.charAt(colonLocation-1)};
