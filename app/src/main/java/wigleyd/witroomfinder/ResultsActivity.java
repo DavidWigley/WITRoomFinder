@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -16,7 +15,13 @@ import java.util.ArrayList;
 public class ResultsActivity extends Activity implements View.OnClickListener {
 
     private static final int PADDING = 15;
-    private int tagNumber=0;
+    private int tagNumber=0, hour;
+    private ArrayList classrooms;
+    private String day;
+    public final static String DAY_STRING = "DAY_STRING";
+    public final static String CLASSROOM_STRING = "CLASSROOM_STRING";
+    public final static String HOUR_STRING = "HOUR_STRING";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +39,8 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         String hourString = intent.getStringExtra(MyActivity.HOUR_STRING);
         String minuteString = intent.getStringExtra(MyActivity.MINUTE_STRING);
         String building = intent.getStringExtra(MyActivity.BUILDING_STRING);
-        String day = intent.getStringExtra(MyActivity.DAY_STRING);
-        System.out.println("I was given this: " + hourString);
-
-        int hour = Integer.parseInt(hourString);
+        day = intent.getStringExtra(MyActivity.DAY_STRING);
+        hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);
@@ -46,14 +49,12 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         sv.addView(ll);
         ArrayList results = myHandler.getResults();
         ArrayList allClassrooms = myHandler.getAllClassrooms();
+        setClassrooms(allClassrooms);
         TextView firstBox = new TextView(this);
         String extra = "";
         //handles case when there is not an additional 0 following the minute. Fixes the format.
         if (minute < 10) {
             extra = "0";
-        }
-        if (hour >=13) {
-            hour-=12;
         }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
                 " at " + hour + ":" + extra + minute);
@@ -95,20 +96,22 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
         //This actually works for detecting which box I clicked on
         String tag = v.getTag().toString();
-        System.out.println("I clicked on a classroom");
-        System.out.println("The tag I clicked on was: " + tag);
         tagNumber = Integer.parseInt(tag);
         getTextBoxClicked(tagNumber);
 
+        //start other intent
+        Intent detailsIntent = new Intent(getBaseContext(), ClassDetailsActivity.class);
+        detailsIntent.putExtra(CLASSROOM_STRING, classrooms.get(tagNumber).toString());
+        detailsIntent.putExtra(DAY_STRING, day);
+        detailsIntent.putExtra(HOUR_STRING,hour);
+        startActivity(detailsIntent);
     }
 
     public int getTextBoxClicked(int box) {
         return box;
     }
-
-    public void initializeDetails(ArrayList classes){
-        Intent detailsIntent = new Intent(getBaseContext(), ResultsActivity.class);
-        //detailsIntent.putExtra("Class name", allClassrooms.get(tag));
+    public void setClassrooms(ArrayList rooms){
+        classrooms = rooms;
     }
 
 }

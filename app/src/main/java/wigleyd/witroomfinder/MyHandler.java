@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MyHandler {
+	private static final int DEFAULT_HOUR = 0;
+	private static final int DEFAULT_MINUTE=0;
+
 	Keywords words = new Keywords();
 	Search search;
 	String building, buildingPass;
@@ -17,6 +20,16 @@ public class MyHandler {
 		decipherDay(day);
 		this.currentHour = currentHour;
 		this.currentMinute = currentMinute;
+		search = new Search(input);
+		fixStrings();
+		performSearch();
+		getUpdatedListings();
+	}
+	public MyHandler(String building, String day,InputStream input) {
+		this.building = building;
+		decipherDay(day);
+		currentHour = DEFAULT_HOUR;
+		currentMinute = DEFAULT_MINUTE;
 		search = new Search(input);
 		fixStrings();
 		performSearch();
@@ -65,7 +78,8 @@ public class MyHandler {
 			buildingPass = "WLSTN";
 			stringToUpdate = words.willistonHall;
 		}else {
-			System.out.println("PROBLEM");
+			buildingPass = building;
+			stringToUpdate = words.blank;
 		}
 	}
 
@@ -88,7 +102,13 @@ public class MyHandler {
 			day = words.getThursdayCases();
 		}else if (input.equalsIgnoreCase("Friday")){
 			day = words.getFridayCases();
+		}else {
+
 		}
+	}
+
+	public void skipTimeSearch() {
+		search.skipTimeSearch();
 	}
 
 	public ArrayList getResults(){
@@ -97,5 +117,7 @@ public class MyHandler {
 	public ArrayList getAllClassrooms() {
 		return search.getAllClassrooms();
 	}
-
+	public ArrayList getDetailedRooms(){
+		return search.getDetailedRooms();
+	}
 }

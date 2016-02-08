@@ -21,11 +21,15 @@ public class Keywords {
 	String[] rubenstein = {"RBSTN 005", "RBSTN 101", "RBSTN 103", "RBSTN 104", "RBSTN 105", "RBSTN 201"};
 	String[] willistonHall = {"WLSTN 001"};
 	String[] willisonHall = {"WILLS 102", "WILLS 103", "WILLS 105"};
+	String[] blank = {""};//should actually serve a purpose not actually garbage
 	
 	//essential
 	String[] regex = {"WIT	", "COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
 			"MYTH AMERICA:"};
-	String[] mondayCases = {"	M"};
+
+	//shitty solution to ISSUE #17, but it does work
+	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
+
 	String[] tuesdayCases = {"	MT", "T	", "TR	","TF", "TW"}; //TF and TW are unique enough for me. That's why I don't include tab
 	String[] wednesdayCases = {"	W	", "	MW", "TW", "	WR", "	WRF	"};
 	String[] thursdayCases = {"R	", "RF"};
