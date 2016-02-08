@@ -46,7 +46,7 @@ public class ClassDetailsActivity extends Activity {
         firstBox.setText("The classroom: " + classroom + " on " + day + " has these classes");
         ll.addView(firstBox);
         for (int i =0; i < timeResultsList.size(); i++){
-            System.out.println("Got this: " + timeResultsList.get(i).toString());
+            System.out.println("Got this: " + rawResultsList.get(i).toString());
             TextView tv = new TextView(this);
             //tv.setBackgroundResource(color);
             tv.setText(timeResultsList.get(i).toString());

@@ -26,7 +26,10 @@ public class Keywords {
 	//essential
 	String[] regex = {"WIT	", "COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
 			"MYTH AMERICA:"};
-	String[] mondayCases = {"	M"};
+
+	//shitty solution to ISSUE #17, but it does work
+	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
+
 	String[] tuesdayCases = {"	MT", "T	", "TR	","TF", "TW"}; //TF and TW are unique enough for me. That's why I don't include tab
 	String[] wednesdayCases = {"	W	", "	MW", "TW", "	WR", "	WRF	"};
 	String[] thursdayCases = {"R	", "RF"};
