@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ClassDetailsActivity extends Activity {
 
@@ -38,6 +39,7 @@ public class ClassDetailsActivity extends Activity {
         myHandler.skipTimeSearch();
         rawResultsList = myHandler.getDetailedRooms();
         ArrayList timeResultsList = getTrimmedResults(rawResultsList);
+        timeResultsList = getOrderedLists(timeResultsList);
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
@@ -84,6 +86,34 @@ public class ClassDetailsActivity extends Activity {
             modifiedList.add(totalTimeString);
         }
         return modifiedList;
+    }
+
+    public ArrayList getOrderedLists(ArrayList inputList) {
+        int[] originalTime = new int[inputList.size()];
+        int[] sortedTime = new int[inputList.size()];
+        for (int i =0; i < inputList.size(); i++) {
+            String currentEntry = inputList.get(i).toString();
+            char[] hourArray = {currentEntry.charAt(0), currentEntry.charAt(1)};
+            String hour = Character.toString(hourArray[0]) + Character.toString(hourArray[1]);
+            int time = Integer.parseInt(hour);
+            //I spit it into military time just so I can do logical checks faster.
+            if (time >=1 && time <=7){
+                time +=12;
+            }
+            originalTime[i] = time;
+            sortedTime[i] = time;
+        }
+        Arrays.sort(sortedTime);
+
+        ArrayList sortedList = new ArrayList();
+        for (int sorted =0;  sorted< sortedTime.length; sorted++) {
+            for (int orig = 0; orig < originalTime.length; orig++) {
+                if (originalTime[orig] == sortedTime[sorted]) {
+                    sortedList.add(inputList.get(orig));
+                }
+            }
+        }
+        return sortedList;
     }
 
 }
