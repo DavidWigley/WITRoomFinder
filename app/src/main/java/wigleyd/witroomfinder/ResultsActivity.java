@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -56,9 +55,6 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         if (minute < 10) {
             extra = "0";
         }
-        if (hour >=13) {
-            hour-=12;
-        }
         firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
                 " at " + hour + ":" + extra + minute);
         ll.addView(firstBox);
@@ -99,8 +95,6 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
         //This actually works for detecting which box I clicked on
         String tag = v.getTag().toString();
-        System.out.println("I clicked on a classroom");
-        System.out.println("The tag I clicked on was: " + tag);
         tagNumber = Integer.parseInt(tag);
         getTextBoxClicked(tagNumber);
 
@@ -117,9 +111,5 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
     public void setClassrooms(ArrayList rooms){
         classrooms = rooms;
     }
-    public ArrayList getClassrooms(){
-        return classrooms;
-    }
-
 
 }

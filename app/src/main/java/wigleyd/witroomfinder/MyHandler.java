@@ -4,6 +4,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MyHandler {
+	private static final int DEFAULT_HOUR = 0;
+	private static final int DEFAULT_MINUTE=0;
+
 	Keywords words = new Keywords();
 	Search search;
 	String building, buildingPass;
@@ -14,10 +17,19 @@ public class MyHandler {
 
 	public MyHandler(String building, String day, int currentHour, int currentMinute, InputStream input) {
 		this.building = building;
-		System.out.println("I was passed: " + day);
 		decipherDay(day);
 		this.currentHour = currentHour;
 		this.currentMinute = currentMinute;
+		search = new Search(input);
+		fixStrings();
+		performSearch();
+		getUpdatedListings();
+	}
+	public MyHandler(String building, String day,InputStream input) {
+		this.building = building;
+		decipherDay(day);
+		currentHour = DEFAULT_HOUR;
+		currentMinute = DEFAULT_MINUTE;
 		search = new Search(input);
 		fixStrings();
 		performSearch();

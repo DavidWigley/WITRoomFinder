@@ -9,6 +9,8 @@ public class Search {
 	private ArrayList conflictList = new ArrayList();
 	public ArrayList results = new ArrayList();
 	private ArrayList allClassrooms = new ArrayList();
+
+	//used for detailed searches.
 	private ArrayList detailedRooms = new ArrayList();
 	private boolean shouldSearchTime = true;
 
@@ -53,20 +55,17 @@ public class Search {
 		currentMinute = 0;
 		getEntries();
 		trimEntries();
-		System.out.println("Starting the search there are " + conflictList.size() + " entries");
 		boolean tripped = false;
 		for (int i = 0; i < conflictList.size(); i++) {
 			String currentEntry = conflictList.get(i).toString();
 			if (!currentEntry.contains(room)) {
 				tripped = true;
-				//System.out.println(conflictList.get(i).toString() + "does not contain " + room);
 			} else {
-				System.out.println("A room matched the room number " + conflictList.get(i).toString() + room);
 				boolean hasDay = false;
 				for (int j = 0; j < day.length; j++) {
 					if (currentEntry.contains(day[j])) {
 						hasDay = true;
-						System.out.println("That room is on the same day");
+						//add the class to the detailed list because its in the same building on same day.
 						detailedRooms.add(currentEntry);
 					}
 				}
@@ -81,6 +80,8 @@ public class Search {
 			}
 		}
 		tripped = false;
+		//loop that asks if I care about the time the class is going on. When I get the detailed listings I dont care
+		//about time so I skip this whole block and save time.
 		if (shouldSearchTime) {
 			for (int i = 0; i < conflictList.size(); i++) {
 				String currentEntry = conflictList.get(i).toString();
