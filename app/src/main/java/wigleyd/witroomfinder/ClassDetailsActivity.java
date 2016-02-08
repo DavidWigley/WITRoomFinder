@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class ClassDetailsActivity extends Activity {
 
     private static final int PADDING = 15;
+    private static final int LENGTH_OF_TIME_DESCRIPTION = 17;
+
     ArrayList rawResultsList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,28 +57,31 @@ public class ClassDetailsActivity extends Activity {
         this.setContentView(sv);
     }
 
-    //add the minute in too
-    
+    //add some logic that makes past ones red. Maybe some logic of sorting
+    //them should be implemented.
+
+    /**
+     * Method that will take raw class outputs and return only the times.
+     * @param rawList
+     * @return modifiedList which contains only the times in a format I specify.
+     */
     public ArrayList getTrimmedResults(ArrayList rawList) {
         ArrayList modifiedList = new ArrayList();
         for (int i = 0; i < rawList.size(); i++){
             String currentEntry = rawList.get(i).toString();
             int colonLocation = currentEntry.indexOf(":");
-            //this should return the first instance of the colon
-            char[] firstTime = {currentEntry.charAt(colonLocation - 2), currentEntry.charAt(colonLocation - 1)};
-            //ok so this adds the numbers I actually want to just take on that num at the end
-            String time = Character.toString(firstTime[0]) + Character.toString(firstTime[1]);
-            char[] secondTime = {currentEntry.charAt(colonLocation + 7), currentEntry.charAt(colonLocation + 8)};
-            String time2 = Character.toString(secondTime[0]) + Character.toString(secondTime[1]);
-            if (time.startsWith(" ")) {
-                time = Character.toString(firstTime[1]);
+            char[] totalTimeArray = new char[LENGTH_OF_TIME_DESCRIPTION];
+            for (int currentPosition = 0; currentPosition < totalTimeArray.length; currentPosition++){
+                totalTimeArray[currentPosition] = currentEntry.charAt(colonLocation+(currentPosition-2));
             }
-            if (time2.startsWith(" ")) {
-                time2 = Character.toString(secondTime[1]);
-            }
-            int startHour = Integer.parseInt(time);
-            int endHour = Integer.parseInt(time2);
-            modifiedList.add(startHour + ":00 " + " - " + endHour + ":00");
+            String totalTimeString = Character.toString(totalTimeArray[0]) + Character.toString(totalTimeArray[1]) +
+                    Character.toString(totalTimeArray[2]) + Character.toString(totalTimeArray[3]) + Character.toString(totalTimeArray[4]) +
+                    Character.toString(totalTimeArray[5]) + Character.toString(totalTimeArray[6]) + Character.toString(totalTimeArray[7]) +
+                    Character.toString(totalTimeArray[8]) + Character.toString(totalTimeArray[9]) + Character.toString(totalTimeArray[10]) +
+                    Character.toString(totalTimeArray[11]) + Character.toString(totalTimeArray[12]) + Character.toString(totalTimeArray[13]) +
+                    Character.toString(totalTimeArray[14]) +  Character.toString(totalTimeArray[15]) +  Character.toString(totalTimeArray[16]);
+
+            modifiedList.add(totalTimeString);
         }
         return modifiedList;
     }
