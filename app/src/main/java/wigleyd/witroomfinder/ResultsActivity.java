@@ -15,11 +15,12 @@ import java.util.ArrayList;
 public class ResultsActivity extends Activity implements View.OnClickListener {
 
     private static final int PADDING = 15;
-    private int tagNumber=0;
+    private int tagNumber=0, hour;
     private ArrayList classrooms;
     private String day;
     public final static String DAY_STRING = "DAY_STRING";
     public final static String CLASSROOM_STRING = "CLASSROOM_STRING";
+    public final static String HOUR_STRING = "HOUR_STRING";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         String minuteString = intent.getStringExtra(MyActivity.MINUTE_STRING);
         String building = intent.getStringExtra(MyActivity.BUILDING_STRING);
         day = intent.getStringExtra(MyActivity.DAY_STRING);
-        int hour = Integer.parseInt(hourString);
+        hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);
@@ -102,6 +103,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         Intent detailsIntent = new Intent(getBaseContext(), ClassDetailsActivity.class);
         detailsIntent.putExtra(CLASSROOM_STRING, classrooms.get(tagNumber).toString());
         detailsIntent.putExtra(DAY_STRING, day);
+        detailsIntent.putExtra(HOUR_STRING,hour);
         startActivity(detailsIntent);
     }
 

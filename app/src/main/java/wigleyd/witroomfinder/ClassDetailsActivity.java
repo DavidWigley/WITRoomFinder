@@ -17,6 +17,7 @@ public class ClassDetailsActivity extends Activity {
 
     private static final int PADDING = 15;
     private static final int LENGTH_OF_TIME_DESCRIPTION = 17;
+    private int colorThisMany = 0, hour;
 
     ArrayList rawResultsList;
     @Override
@@ -35,6 +36,7 @@ public class ClassDetailsActivity extends Activity {
         Intent intent = getIntent();
         String classroom = intent.getStringExtra(ResultsActivity.CLASSROOM_STRING);
         String day = intent.getStringExtra(MyActivity.DAY_STRING);
+        hour = intent.getIntExtra(MyActivity.HOUR_STRING,0);
         MyHandler myHandler = new MyHandler(classroom,day,inputStream);
         myHandler.skipTimeSearch();
         rawResultsList = myHandler.getDetailedRooms();
@@ -50,7 +52,11 @@ public class ClassDetailsActivity extends Activity {
         for (int i =0; i < timeResultsList.size(); i++){
             System.out.println("Got this: " + rawResultsList.get(i).toString());
             TextView tv = new TextView(this);
-            //tv.setBackgroundResource(color);
+            if (colorThisMany > i) {
+                tv.setBackgroundResource(R.color.red);
+            }else {
+                tv.setBackgroundResource(R.color.white);
+            }
             tv.setText(timeResultsList.get(i).toString());
             tv.setPadding(0, PADDING, 0, PADDING);
             tv.setTag(i);
@@ -111,6 +117,9 @@ public class ClassDetailsActivity extends Activity {
                 if (originalTime[orig] == sortedTime[sorted]) {
                     sortedList.add(inputList.get(orig));
                 }
+            }
+            if (sortedTime[sorted] < hour){
+                colorThisMany++;
             }
         }
         return sortedList;
