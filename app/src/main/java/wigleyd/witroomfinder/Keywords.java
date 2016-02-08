@@ -21,6 +21,7 @@ public class Keywords {
 	String[] rubenstein = {"RBSTN 005", "RBSTN 101", "RBSTN 103", "RBSTN 104", "RBSTN 105", "RBSTN 201"};
 	String[] willistonHall = {"WLSTN 001"};
 	String[] willisonHall = {"WILLS 102", "WILLS 103", "WILLS 105"};
+	String[] blank = {""};//should actually serve a purpose not actually garbage
 	
 	//essential
 	String[] regex = {"WIT	", "COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",

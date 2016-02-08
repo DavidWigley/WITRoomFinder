@@ -49,7 +49,6 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
                 String minute;
                 //theres a bug with the minute not being 0. it fucks up the logic. Damn it
                 minute="0";
-                System.out.println("Using an hour of " + hourChosen);
                 myIntent.putExtra(HOUR_STRING, hourChosen);
                 myIntent.putExtra(MINUTE_STRING, minute);
                 myIntent.putExtra(BUILDING_STRING, buildingChosen);

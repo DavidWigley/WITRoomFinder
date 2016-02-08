@@ -17,6 +17,11 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
     private static final int PADDING = 15;
     private int tagNumber=0;
+    private ArrayList classrooms;
+    private String day;
+    public final static String DAY_STRING = "DAY_STRING";
+    public final static String CLASSROOM_STRING = "CLASSROOM_STRING";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         String hourString = intent.getStringExtra(MyActivity.HOUR_STRING);
         String minuteString = intent.getStringExtra(MyActivity.MINUTE_STRING);
         String building = intent.getStringExtra(MyActivity.BUILDING_STRING);
-        String day = intent.getStringExtra(MyActivity.DAY_STRING);
+        day = intent.getStringExtra(MyActivity.DAY_STRING);
         System.out.println("I was given this: " + hourString);
 
         int hour = Integer.parseInt(hourString);
@@ -46,6 +51,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         sv.addView(ll);
         ArrayList results = myHandler.getResults();
         ArrayList allClassrooms = myHandler.getAllClassrooms();
+        setClassrooms(allClassrooms);
         TextView firstBox = new TextView(this);
         String extra = "";
         //handles case when there is not an additional 0 following the minute. Fixes the format.
@@ -100,15 +106,22 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         tagNumber = Integer.parseInt(tag);
         getTextBoxClicked(tagNumber);
 
+        //start other intent
+        Intent detailsIntent = new Intent(getBaseContext(), ClassDetailsActivity.class);
+        detailsIntent.putExtra(CLASSROOM_STRING, classrooms.get(tagNumber).toString());
+        detailsIntent.putExtra(DAY_STRING, day);
+        startActivity(detailsIntent);
     }
 
     public int getTextBoxClicked(int box) {
         return box;
     }
-
-    public void initializeDetails(ArrayList classes){
-        Intent detailsIntent = new Intent(getBaseContext(), ResultsActivity.class);
-        //detailsIntent.putExtra("Class name", allClassrooms.get(tag));
+    public void setClassrooms(ArrayList rooms){
+        classrooms = rooms;
     }
+    public ArrayList getClassrooms(){
+        return classrooms;
+    }
+
 
 }

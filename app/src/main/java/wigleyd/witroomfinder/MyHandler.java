@@ -66,6 +66,8 @@ public class MyHandler {
 			stringToUpdate = words.willistonHall;
 		}else {
 			System.out.println("PROBLEM");
+			buildingPass = building;
+			stringToUpdate = words.blank;
 		}
 	}
 
