@@ -14,6 +14,7 @@ public class MyHandler {
 
 	public MyHandler(String building, String day, int currentHour, int currentMinute, InputStream input) {
 		this.building = building;
+		System.out.println("I was passed: " + day);
 		decipherDay(day);
 		this.currentHour = currentHour;
 		this.currentMinute = currentMinute;
@@ -65,7 +66,6 @@ public class MyHandler {
 			buildingPass = "WLSTN";
 			stringToUpdate = words.willistonHall;
 		}else {
-			System.out.println("PROBLEM");
 			buildingPass = building;
 			stringToUpdate = words.blank;
 		}
@@ -90,7 +90,13 @@ public class MyHandler {
 			day = words.getThursdayCases();
 		}else if (input.equalsIgnoreCase("Friday")){
 			day = words.getFridayCases();
+		}else {
+
 		}
+	}
+
+	public void skipTimeSearch() {
+		search.skipTimeSearch();
 	}
 
 	public ArrayList getResults(){
@@ -99,5 +105,7 @@ public class MyHandler {
 	public ArrayList getAllClassrooms() {
 		return search.getAllClassrooms();
 	}
-
+	public ArrayList getDetailedRooms(){
+		return search.getDetailedRooms();
+	}
 }
