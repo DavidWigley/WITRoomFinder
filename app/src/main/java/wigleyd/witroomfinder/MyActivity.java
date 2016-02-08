@@ -24,13 +24,15 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
     public final static String BUILDING_STRING = "BUILDING_STRING";
     public final static String DAY_STRING = "DAY_STRING";
 
-    private Spinner buildingSpinner, daySpinner;
+    private Spinner buildingSpinner, daySpinner, hourSpinner;
     private static final String[] buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
             "Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willison Hall", "Williston Hall"};
     private static final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-    private EditText hourInput;
+    //I can do 1-12 because classes start at 8am and at 8pm so no need to use 24hr format
+    private static final String[] hourChoices = {"8am","9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm","6pm","7pm"};
+    private static final String[] hours = {"8","9","10","11","12","1","2","3","4","5","6","7"};
     private Button submit;
-    String buildingChosen, dayChosen;
+    String buildingChosen, dayChosen, hourChosen;
 
 
     @Override
@@ -38,27 +40,17 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
-        hourInput = (EditText) findViewById(R.id.hour_message);
+
         submit = (Button) findViewById(R.id.submit_button);
         submit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getBaseContext(), ResultsActivity.class);
-                String hour, minute;
-                //deals with input box left blank. I leave it as an input so people can plan ahead
-                Calendar calendar = Calendar.getInstance();
-                System.out.println("trying to use current time of: " + Calendar.HOUR_OF_DAY);
-                if (hourInput.getText().toString().trim().length() == 0) {
-                    hour = Integer.toString(calendar.get(Calendar.HOUR_OF_DAY));
-                    System.out.println("Tried to set hour to: " + calendar.get(Calendar.HOUR_OF_DAY));
-                    minute = Integer.toString(calendar.get(Calendar.MINUTE));
-                }else {
-                    hour = hourInput.getText().toString();
-                    minute = "0";
-                }
+                String minute;
                 //theres a bug with the minute not being 0. it fucks up the logic. Damn it
-                //minute="0";
-                myIntent.putExtra(HOUR_STRING, hour);
+                minute="0";
+                System.out.println("Using an hour of " + hourChosen);
+                myIntent.putExtra(HOUR_STRING, hourChosen);
                 myIntent.putExtra(MINUTE_STRING, minute);
                 myIntent.putExtra(BUILDING_STRING, buildingChosen);
                 myIntent.putExtra(DAY_STRING, dayChosen);
@@ -67,19 +59,24 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
         });
 
         buildingSpinner = (Spinner) findViewById(R.id.building_spinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> buildingAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, buildings);
 
         daySpinner = (Spinner) findViewById(R.id.day_spinner);
         ArrayAdapter<String> dayAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, days);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        buildingSpinner.setAdapter(adapter);
+        hourSpinner = (Spinner) findViewById(R.id.hourSpinner);
+        ArrayAdapter<String> hourAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, hourChoices);
+
+        buildingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        buildingSpinner.setAdapter(buildingAdapter);
         buildingSpinner.setOnItemSelectedListener(this);
         daySpinner.setAdapter(dayAdapter);
         daySpinner.setOnItemSelectedListener(this);
-
+        hourSpinner.setAdapter(hourAdapter);
+        hourSpinner.setOnItemSelectedListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
@@ -113,6 +110,9 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
                 break;
             case R.id.day_spinner:
                 dayChosen = days[position];
+                break;
+            case R.id.hourSpinner:
+                hourChosen = hours[position];
                 break;
         }
     }

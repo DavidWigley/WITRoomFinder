@@ -35,6 +35,8 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         String minuteString = intent.getStringExtra(MyActivity.MINUTE_STRING);
         String building = intent.getStringExtra(MyActivity.BUILDING_STRING);
         String day = intent.getStringExtra(MyActivity.DAY_STRING);
+        System.out.println("I was given this: " + hourString);
+
         int hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
         ScrollView sv = new ScrollView(this);
