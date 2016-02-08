@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -11,8 +13,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class ResultsActivity extends Activity {
+public class ResultsActivity extends Activity implements View.OnClickListener {
 
+    private static final int PADDING = 15;
+    private int tagNumber=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,8 @@ public class ResultsActivity extends Activity {
         String minuteString = intent.getStringExtra(MyActivity.MINUTE_STRING);
         String building = intent.getStringExtra(MyActivity.BUILDING_STRING);
         String day = intent.getStringExtra(MyActivity.DAY_STRING);
+        System.out.println("I was given this: " + hourString);
+
         int hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
         ScrollView sv = new ScrollView(this);
@@ -66,16 +72,43 @@ public class ResultsActivity extends Activity {
                     color = R.color.red;
                 }
             }
+            //deals with case that all classrooms are filled so results
+            //array is empty, therefore everything should be filled/red.
+            if(results.size() == 0) {
+                color = R.color.red;
+            }
             TextView tv = new TextView(this);
             tv.setBackgroundResource(color);
             tv.setText(allClassrooms.get(i).toString());
+            tv.setPadding(0, PADDING, 0, PADDING);
+            tv.setTag(i);
+            tv.setOnClickListener(this);
             ll.addView(tv);
         }
-
         this.setContentView(sv);
 
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+        //This actually works for detecting which box I clicked on
+        String tag = v.getTag().toString();
+        System.out.println("I clicked on a classroom");
+        System.out.println("The tag I clicked on was: " + tag);
+        tagNumber = Integer.parseInt(tag);
+        getTextBoxClicked(tagNumber);
+
+    }
+
+    public int getTextBoxClicked(int box) {
+        return box;
+    }
+
+    public void initializeDetails(ArrayList classes){
+        Intent detailsIntent = new Intent(getBaseContext(), ResultsActivity.class);
+        //detailsIntent.putExtra("Class name", allClassrooms.get(tag));
+    }
 
 }
