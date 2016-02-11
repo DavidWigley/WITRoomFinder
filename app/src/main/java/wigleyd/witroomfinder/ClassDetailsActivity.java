@@ -47,10 +47,10 @@ public class ClassDetailsActivity extends Activity {
         ll.setOrientation(LinearLayout.VERTICAL);
         sv.addView(ll);
         TextView firstBox = new TextView(this);
-        firstBox.setText("The classroom: " + classroom + " on " + day + " has these classes");
+        firstBox.setText("The classroom: " + classroom + " on " + day + " has these classes." + "\n"
+            + "The times that have past " + hour + " are shaded red.");
         ll.addView(firstBox);
         for (int i =0; i < timeResultsList.size(); i++){
-            System.out.println("Got this: " + rawResultsList.get(i).toString());
             TextView tv = new TextView(this);
             if (colorThisMany > i) {
                 tv.setBackgroundResource(R.color.red);
