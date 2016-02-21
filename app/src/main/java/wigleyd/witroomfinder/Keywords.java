@@ -29,7 +29,7 @@ public class Keywords {
 
 	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
 
-	String[] tuesdayCases = {"	MT", "	T	",  "	TW", "TR	","TF	"}; 
+	String[] tuesdayCases = {"	MT", "	T	",  "	TW", "TR	","TF	"};
 	String[] wednesdayCases = {"	W	", "	MW", "TW", "	WR", "	WRF	"};
 	String[] thursdayCases = {"R	", "RF"};
 	String[] fridayCases = {"F	"}; //this will pick up last names that end with F well see how big that is.

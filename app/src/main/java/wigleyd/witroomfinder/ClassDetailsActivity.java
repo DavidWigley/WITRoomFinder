@@ -42,10 +42,13 @@ public class ClassDetailsActivity extends Activity {
         rawResultsList = myHandler.getDetailedRooms();
         ArrayList timeResultsList = getTrimmedResults(rawResultsList);
         //My print statement to get the raw list of results. Used for debugging.
-//        for (int i =0; i <rawResultsList.size(); i++) {
-//            System.out.println("The raw list is: " + rawResultsList.get(i).toString());
-//        }
+        for (int i =0; i <rawResultsList.size(); i++) {
+            System.out.println("The raw list is: " + rawResultsList.get(i).toString());
+        }
+        System.out.println("The length of our raw list is: " + rawResultsList.size());
+        System.out.println("Our timed list has a length of: " + timeResultsList.size());
         timeResultsList = getOrderedLists(timeResultsList);
+        System.out.println("After being orded, our timed list has a length of: " + timeResultsList.size());
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
@@ -61,6 +64,7 @@ public class ClassDetailsActivity extends Activity {
             }else {
                 tv.setBackgroundResource(R.color.white);
             }
+            System.out.println("Loop: " + i + " Adding: " + timeResultsList.get(i).toString() + " to list");
             tv.setText(timeResultsList.get(i).toString());
             tv.setPadding(0, PADDING, 0, PADDING);
             tv.setTag(i);
@@ -114,12 +118,12 @@ public class ClassDetailsActivity extends Activity {
             sortedTime[i] = time;
         }
         Arrays.sort(sortedTime);
-
         ArrayList sortedList = new ArrayList();
         for (int sorted =0;  sorted< sortedTime.length; sorted++) {
             for (int orig = 0; orig < originalTime.length; orig++) {
                 if (originalTime[orig] == sortedTime[sorted]) {
                     sortedList.add(inputList.get(orig));
+                    break;
                 }
             }
             if (sortedTime[sorted] < hour){
