@@ -25,7 +25,7 @@ public class Keywords {
 	
 	//essential
 	String[] regex = {"WIT	", "COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
-			"MYTH AMERICA:"};
+			"MYTH AMERICA:", "ENGR"};
 
 	//shitty solution to ISSUE #17, but it does work
 	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
