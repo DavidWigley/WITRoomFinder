@@ -42,9 +42,9 @@ public class ClassDetailsActivity extends Activity {
         rawResultsList = myHandler.getDetailedRooms();
         ArrayList timeResultsList = getTrimmedResults(rawResultsList);
         //My print statement to get the raw list of results. Used for debugging.
-        for (int i =0; i <rawResultsList.size(); i++) {
-            System.out.println("The raw list is: " + rawResultsList.get(i).toString());
-        }
+//        for (int i =0; i <rawResultsList.size(); i++) {
+//            System.out.println("The raw list is: " + rawResultsList.get(i).toString());
+//        }
         timeResultsList = getOrderedLists(timeResultsList);
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);

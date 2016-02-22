@@ -101,9 +101,7 @@ public class Search {
 					time2 = Character.toString(secondTime[1]);
 				}
 				//System.out.println("I'm on this entry: " + conflictList.get(i).toString());
-				System.out.println("The current entry is: " + currentEntry);
 
-				System.out.println(time2);
 				int startHour = Integer.parseInt(time);
 				int endHour = Integer.parseInt(time2);
 				int delta = (endHour - startHour);
