@@ -41,22 +41,27 @@ public class ClassDetailsActivity extends Activity {
         myHandler.skipTimeSearch();
         rawResultsList = myHandler.getDetailedRooms();
         ArrayList timeResultsList = getTrimmedResults(rawResultsList);
+        //My print statement to get the raw list of results. Used for debugging.
+//        for (int i =0; i <rawResultsList.size(); i++) {
+//            System.out.println("The raw list is: " + rawResultsList.get(i).toString());
+//        }
         timeResultsList = getOrderedLists(timeResultsList);
         ScrollView sv = new ScrollView(this);
         LinearLayout ll = new LinearLayout(this);
         ll.setOrientation(LinearLayout.VERTICAL);
         sv.addView(ll);
         TextView firstBox = new TextView(this);
-        firstBox.setText("The classroom: " + classroom + " on " + day + " has these classes");
+        firstBox.setText("The classroom: " + classroom + " on " + day + " has these classes." + "\n"
+            + "The times that have past " + hour + " are shaded red.");
         ll.addView(firstBox);
         for (int i =0; i < timeResultsList.size(); i++){
-            System.out.println("Got this: " + rawResultsList.get(i).toString());
             TextView tv = new TextView(this);
             if (colorThisMany > i) {
                 tv.setBackgroundResource(R.color.red);
             }else {
                 tv.setBackgroundResource(R.color.white);
             }
+            System.out.println("Loop: " + i + " Adding: " + timeResultsList.get(i).toString() + " to list");
             tv.setText(timeResultsList.get(i).toString());
             tv.setPadding(0, PADDING, 0, PADDING);
             tv.setTag(i);
@@ -110,12 +115,12 @@ public class ClassDetailsActivity extends Activity {
             sortedTime[i] = time;
         }
         Arrays.sort(sortedTime);
-
         ArrayList sortedList = new ArrayList();
         for (int sorted =0;  sorted< sortedTime.length; sorted++) {
             for (int orig = 0; orig < originalTime.length; orig++) {
                 if (originalTime[orig] == sortedTime[sorted]) {
                     sortedList.add(inputList.get(orig));
+                    break;
                 }
             }
             if (sortedTime[sorted] < hour){

@@ -72,8 +72,10 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
         buildingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         buildingSpinner.setAdapter(buildingAdapter);
         buildingSpinner.setOnItemSelectedListener(this);
+        dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         daySpinner.setAdapter(dayAdapter);
         daySpinner.setOnItemSelectedListener(this);
+        hourAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hourSpinner.setAdapter(hourAdapter);
         hourSpinner.setOnItemSelectedListener(this);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

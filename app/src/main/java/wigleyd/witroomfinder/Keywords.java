@@ -25,12 +25,11 @@ public class Keywords {
 	
 	//essential
 	String[] regex = {"WIT	", "COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
-			"MYTH AMERICA:"};
+			"MYTH AMERICA:", "ENGR"};
 
-	//shitty solution to ISSUE #17, but it does work
 	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
 
-	String[] tuesdayCases = {"	MT", "T	", "TR	","TF", "TW"}; //TF and TW are unique enough for me. That's why I don't include tab
+	String[] tuesdayCases = {"	MT", "	T	",  "	TW", "TR	","TF	"};
 	String[] wednesdayCases = {"	W	", "	MW", "TW", "	WR", "	WRF	"};
 	String[] thursdayCases = {"R	", "RF"};
 	String[] fridayCases = {"F	"}; //this will pick up last names that end with F well see how big that is.
