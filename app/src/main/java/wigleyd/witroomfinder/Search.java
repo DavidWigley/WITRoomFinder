@@ -36,6 +36,7 @@ public class Search {
 				conflictList.set(i, conflictList.get(i).toString().replace(keys[j], ""));
 			}
 		}
+		conflictList = trimUpToDay(conflictList);
 	}
 
 	public void skipTimeSearch() {
@@ -156,6 +157,65 @@ public class Search {
 				tripped = false;
 			}
 		}
+	}
+
+	/**
+	 * Method that will be responsible for trimming all the course registration data until it reaches the day
+	 * which is when I start caring about what it says. Basically everything before that is junk.
+	 */
+	private ArrayList trimUpToDay(ArrayList originalList) {
+		ArrayList trimmedList = new ArrayList();
+		Keywords keywords = new Keywords();
+		String[] currentSearch = null;
+		boolean shouldBreak = false;
+		final int DAYS_IN_WEEK =5;
+		for (int i =0; i <originalList.size(); i++) {
+			String currentString = originalList.get(i).toString();
+			String newString = null;
+
+			for (int j=0; j < DAYS_IN_WEEK; j++) {
+				if (j==0) {
+					currentSearch = keywords.mondayCases;
+				}else if (j==1) {
+					currentSearch = keywords.tuesdayCases;
+				}else if (j==2) {
+					currentSearch = keywords.wednesdayCases;
+				}else if (j==3) {
+					currentSearch = keywords.thursdayCases;
+				}else if (j==4) {
+					currentSearch = keywords.fridayCases;
+				}
+				for (int caseNum = 0; caseNum < currentSearch.length; caseNum++){
+					//I think I could technically replace this conditional with the first code block
+					//inside it but I'm reluctant to do that so I'm keeping it how it is.
+					if (currentString.contains(currentSearch[caseNum])){
+						//gets the index where we find the string.
+						int index = currentString.indexOf(currentSearch[caseNum]);
+						//trim up to where the day is stated
+						newString = currentString.substring(index);
+						shouldBreak = true;
+						break;
+					}
+				}
+				//trying to break from more for loops so this doesn't take forever.
+				if (shouldBreak) {
+					shouldBreak = false;
+					break;
+				}
+			}
+			//System.out.println("Orig entry was: " + currentString);
+			//System.out.println("New entry is: " + newString);
+
+			//If the entry was garbage or had a TBA day I'm not going to add it because its junk anyways. I cant find a
+			//room for a class that doesnt exist or has a TBD meeting day
+			if (newString != null) {
+				trimmedList.add(newString);
+			}
+
+
+		}
+
+		return trimmedList;
 	}
 
 	/**

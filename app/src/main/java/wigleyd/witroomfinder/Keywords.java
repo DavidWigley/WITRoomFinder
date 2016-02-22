@@ -24,13 +24,16 @@ public class Keywords {
 	String[] blank = {""};//should actually serve a purpose not actually garbage
 	
 	//essential
-	String[] regex = {"WIT	", "COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
-			"MYTH AMERICA:", "ENGR"};
+	String[] regex = {"WIT	", "ENGR", "LITR"};
+
+//	//stuff that used to be in the regex. Dont need it anymore, will chop once I'm sure
+//	String[] specificProblems = {"COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
+//			"MYTH AMERICA:", "VISUALIZATION 2: ADV PRSPECTIV", "CAD 1: SURSURFACE MODELING\tT", "DESIGN PERSP: TOPICS IN HISTOR"};
 
 	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
 
 	String[] tuesdayCases = {"	MT", "	T	",  "	TW", "TR	","TF	"};
-	String[] wednesdayCases = {"	W	", "	MW", "TW", "	WR", "	WRF	"};
+	String[] wednesdayCases = {"	W	", "	MW", "	MTW", "	TW", "	WR", "	WRF	"};
 	String[] thursdayCases = {"R	", "RF"};
 	String[] fridayCases = {"F	"}; //this will pick up last names that end with F well see how big that is.
 	public String[] getKeywords(){

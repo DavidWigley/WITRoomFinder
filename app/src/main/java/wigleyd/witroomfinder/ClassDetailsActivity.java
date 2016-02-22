@@ -61,7 +61,6 @@ public class ClassDetailsActivity extends Activity {
             }else {
                 tv.setBackgroundResource(R.color.white);
             }
-            System.out.println("Loop: " + i + " Adding: " + timeResultsList.get(i).toString() + " to list");
             tv.setText(timeResultsList.get(i).toString());
             tv.setPadding(0, PADDING, 0, PADDING);
             tv.setTag(i);
