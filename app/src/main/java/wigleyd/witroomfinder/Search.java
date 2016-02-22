@@ -67,6 +67,7 @@ public class Search {
 						hasDay = true;
 						//add the class to the detailed list because its in the same building on same day.
 						detailedRooms.add(currentEntry);
+						break;
 					}
 				}
 				if (hasDay == false) {
@@ -121,6 +122,7 @@ public class Search {
 							//No class going on, its ended. I remove it from my conflicts
 							tripped = true;
 						}
+						//So if the above condition does not pass it means there is a class going on.
 					} else {
 						tripped = true;
 					}
@@ -145,6 +147,7 @@ public class Search {
 			for (int j =0; j < conflictList.size(); j++) {
 				if (conflictList.get(j).toString().contains(results.get(i).toString())){
 					tripped = true;
+					break;
 				}
 			}
 			if(tripped == true){
