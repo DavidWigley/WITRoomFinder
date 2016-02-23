@@ -5,12 +5,16 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResultsActivity extends Activity implements View.OnClickListener {
 
@@ -21,11 +25,13 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
     public final static String DAY_STRING = "DAY_STRING";
     public final static String CLASSROOM_STRING = "CLASSROOM_STRING";
     public final static String HOUR_STRING = "HOUR_STRING";
+    private ArrayList allClassrooms;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+
         AssetManager manager;
         manager = getAssets();
         InputStream inputStream = null;
@@ -42,52 +48,61 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         day = intent.getStringExtra(MyActivity.DAY_STRING);
         hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
-        ScrollView sv = new ScrollView(this);
-        LinearLayout ll = new LinearLayout(this);
-        ll.setOrientation(LinearLayout.VERTICAL);
+        //ScrollView sv = new ScrollView(this);
+        //LinearLayout ll = new LinearLayout(this);
+        //ll.setOrientation(LinearLayout.VERTICAL);
         MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
-        sv.addView(ll);
+        //sv.addView(ll);
         ArrayList results = myHandler.getResults();
-        ArrayList allClassrooms = myHandler.getAllClassrooms();
+        allClassrooms = myHandler.getAllClassrooms();
         setClassrooms(allClassrooms);
-        TextView firstBox = new TextView(this);
+        //TextView firstBox = new TextView(this);
         String extra = "";
         //handles case when there is not an additional 0 following the minute. Fixes the format.
         if (minute < 10) {
             extra = "0";
         }
-        firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
-                " at " + hour + ":" + extra + minute);
-        ll.addView(firstBox);
-        for (int i =0; i < allClassrooms.size(); i++) {
-            int color = 0;
-            for (int j = 0; j < results.size(); j++){
-                color = 0;
-                if (allClassrooms.get(i).toString().contains(results.get(j).toString())){
+        //firstBox.setText("The results for the open classrooms in: " + building + " on " + day +
+        //" at " + hour + ":" + extra + minute);
+        //ll.addView(firstBox);
+        final List<Classroom> classroomList = new ArrayList<Classroom>();
+        for (int i = 0; i < allClassrooms.size(); i++) {
+            boolean open = false;
+            for (int j = 0; j < results.size(); j++) {
+                if (allClassrooms.get(i).toString().contains(results.get(j).toString())) {
                     //its open
-                    color = R.color.green;
+                    open = true;
                     break;
-                }else if (!allClassrooms.get(i).toString().contains(results.get(j).toString()) &&
-                        color != R.color.green) {
+                } else if (!allClassrooms.get(i).toString().contains(results.get(j).toString())) {
                     //its closed
-                    color = R.color.red;
+                    open = false;
                 }
             }
             //deals with case that all classrooms are filled so results
             //array is empty, therefore everything should be filled/red.
-            if(results.size() == 0) {
-                color = R.color.red;
+            if (results.size() == 0) {
+                open = false;
             }
-            TextView tv = new TextView(this);
-            tv.setBackgroundResource(color);
-            tv.setText(allClassrooms.get(i).toString());
-            tv.setPadding(0, PADDING, 0, PADDING);
-            tv.setTag(i);
-            tv.setOnClickListener(this);
-            ll.addView(tv);
-        }
-        this.setContentView(sv);
+            classroomList.add(new Classroom(open, allClassrooms.get(i).toString()));
 
+            // Create ListItemAdapter
+            ClassroomList adapter;
+            adapter = new ClassroomList(this, 0, classroomList);
+            // Assign ListItemAdapter to ListView
+            ListView listView = (ListView) findViewById(R.id.ListView01);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Classroom classroom = classroomList.get(position);
+                    Intent detailsIntent = new Intent(getBaseContext(), ClassDetailsActivity.class);
+                    detailsIntent.putExtra(CLASSROOM_STRING, ResultsActivity.this.allClassrooms.get(position).toString());
+                    detailsIntent.putExtra(DAY_STRING, day);
+                    detailsIntent.putExtra(HOUR_STRING,hour);
+                    startActivity(detailsIntent);
+                }
+            });
+            listView.setAdapter(adapter);
+        }
     }
 
 
@@ -99,12 +114,12 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         tagNumber = Integer.parseInt(tag);
         getTextBoxClicked(tagNumber);
 
-        //start other intent
+        /*start other intent
         Intent detailsIntent = new Intent(getBaseContext(), ClassDetailsActivity.class);
         detailsIntent.putExtra(CLASSROOM_STRING, classrooms.get(tagNumber).toString());
         detailsIntent.putExtra(DAY_STRING, day);
         detailsIntent.putExtra(HOUR_STRING,hour);
-        startActivity(detailsIntent);
+        startActivity(detailsIntent);*/
     }
 
     public int getTextBoxClicked(int box) {
