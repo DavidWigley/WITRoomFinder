@@ -1,5 +1,6 @@
 package wigleyd.witroomfinder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.view.View.OnClickListener;
 
-import java.util.Calendar;
 
 
 public class MyActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -23,6 +23,7 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
     public final static String MINUTE_STRING = "MINUTE_STRING";
     public final static String BUILDING_STRING = "BUILDING_STRING";
     public final static String DAY_STRING = "DAY_STRING";
+    private final static String MY_EMAIL = "davidtwigley@gmail.com";
 
     private Spinner buildingSpinner, daySpinner, hourSpinner;
     private static final String[] buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
@@ -98,6 +99,13 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            //should open up some type of mail client
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("plain/text");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[] { MY_EMAIL });
+            intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+            intent.putExtra(Intent.EXTRA_TEXT, "mail body");
+            startActivity(Intent.createChooser(intent, ""));
             return true;
         }
 
