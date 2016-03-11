@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ClassDetailsActivity extends Activity {
 
@@ -114,10 +116,24 @@ public class ClassDetailsActivity extends Activity {
             sortedTime[i] = time;
         }
         Arrays.sort(sortedTime);
+        //ok so I want to remove duplicates from my sortedTime list.
+        //A set does not allow duplicates so I dump everything into a set then spit back out into an array
+        Set<Integer> timeSet = new HashSet<>();
+        for (int i = 0; i <sortedTime.length; i++){
+            timeSet.add(sortedTime[i]);
+        }
+        //recycling variable
+        sortedTime = new int[timeSet.size()];
+        int count = 0;
+        for(int i : timeSet){
+            sortedTime[count]= i;
+            count++;
+        }
+        Arrays.sort(sortedTime);
         ArrayList sortedList = new ArrayList();
         for (int sorted =0;  sorted< sortedTime.length; sorted++) {
             for (int orig = 0; orig < originalTime.length; orig++) {
-                if (originalTime[orig] == sortedTime[sorted]) {
+                if (originalTime[orig] == sortedTime[sorted] ) {
                     sortedList.add(inputList.get(orig));
                     break;
                 }
