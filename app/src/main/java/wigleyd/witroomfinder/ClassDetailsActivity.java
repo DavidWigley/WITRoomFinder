@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ClassDetailsActivity extends Activity {
 
@@ -35,10 +37,12 @@ public class ClassDetailsActivity extends Activity {
         }
         Intent intent = getIntent();
         String classroom = intent.getStringExtra(ResultsActivity.CLASSROOM_STRING);
-        String day = intent.getStringExtra(MyActivity.DAY_STRING);
-        hour = intent.getIntExtra(MyActivity.HOUR_STRING,0);
+        String day = intent.getStringExtra(ResultsActivity.DAY_STRING);
+        hour = intent.getIntExtra(ResultsActivity.HOUR_STRING,0);
         MyHandler myHandler = new MyHandler(classroom,day,inputStream);
         myHandler.skipTimeSearch();
+        Classroom specificClassroom = new Classroom(true, classroom);
+        String roomName = specificClassroom.getName();
         rawResultsList = myHandler.getDetailedRooms();
         ArrayList timeResultsList = getTrimmedResults(rawResultsList);
         //My print statement to get the raw list of results. Used for debugging.
@@ -51,7 +55,7 @@ public class ClassDetailsActivity extends Activity {
         ll.setOrientation(LinearLayout.VERTICAL);
         sv.addView(ll);
         TextView firstBox = new TextView(this);
-        firstBox.setText("The classroom: " + classroom + " on " + day + " has these classes." + "\n"
+        firstBox.setText("The classroom: " + roomName + " on " + day + " has these classes." + "\n"
             + "The times that have past " + hour + " are shaded red.");
         ll.addView(firstBox);
         for (int i =0; i < timeResultsList.size(); i++){
@@ -114,10 +118,24 @@ public class ClassDetailsActivity extends Activity {
             sortedTime[i] = time;
         }
         Arrays.sort(sortedTime);
+        //ok so I want to remove duplicates from my sortedTime list.
+        //A set does not allow duplicates so I dump everything into a set then spit back out into an array
+        Set<Integer> timeSet = new HashSet<>();
+        for (int i = 0; i <sortedTime.length; i++){
+            timeSet.add(sortedTime[i]);
+        }
+        //recycling variable
+        sortedTime = new int[timeSet.size()];
+        int count = 0;
+        for(int i : timeSet){
+            sortedTime[count]= i;
+            count++;
+        }
+        Arrays.sort(sortedTime);
         ArrayList sortedList = new ArrayList();
         for (int sorted =0;  sorted< sortedTime.length; sorted++) {
             for (int orig = 0; orig < originalTime.length; orig++) {
-                if (originalTime[orig] == sortedTime[sorted]) {
+                if (originalTime[orig] == sortedTime[sorted] ) {
                     sortedList.add(inputList.get(orig));
                     break;
                 }

@@ -24,6 +24,7 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
     public final static String BUILDING_STRING = "BUILDING_STRING";
     public final static String DAY_STRING = "DAY_STRING";
     private final static String MY_EMAIL = "davidtwigley@gmail.com";
+    private final static String EMAIL_SUBJECT = "BUG REPORT WITROOMFINDER";
 
     private Spinner buildingSpinner, daySpinner, hourSpinner;
     private static final String[] buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
@@ -103,7 +104,7 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
             Intent intent = new Intent(Intent.ACTION_SEND);
             intent.setType("plain/text");
             intent.putExtra(Intent.EXTRA_EMAIL, new String[] { MY_EMAIL });
-            intent.putExtra(Intent.EXTRA_SUBJECT, "subject");
+            intent.putExtra(Intent.EXTRA_SUBJECT, EMAIL_SUBJECT);
             intent.putExtra(Intent.EXTRA_TEXT, "mail body");
             startActivity(Intent.createChooser(intent, ""));
             return true;

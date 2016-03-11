@@ -7,14 +7,14 @@ public class Search {
 
 	private Scanner reader;
 	private ArrayList conflictList = new ArrayList();
-	public ArrayList results = new ArrayList();
+	protected ArrayList results = new ArrayList();
 	private ArrayList allClassrooms = new ArrayList();
 
 	//used for detailed searches.
 	private ArrayList detailedRooms = new ArrayList();
 	private boolean shouldSearchTime = true;
 
-	public Search(InputStream input){
+	protected Search(InputStream input){
 		reader = new Scanner(input);
 	}
 
@@ -39,7 +39,7 @@ public class Search {
 		conflictList = trimUpToDay(conflictList);
 	}
 
-	public void skipTimeSearch() {
+	protected void skipTimeSearch() {
 		shouldSearchTime = false;
 	}
 
@@ -49,7 +49,7 @@ public class Search {
 	 * @param room can search for specific room or just a building
 	 * @param day 
 	 */
-	public void findEntries(String room, String[] day, int currentHour, int currentMinute) {
+	protected void findEntries(String room, String[] day, int currentHour, int currentMinute) {
 
 		//im really sorry for doing this but for the moment going to hardcode the searching minute.
 		//No one will notice it only affects searching logic.
@@ -100,7 +100,7 @@ public class Search {
 				if (time2.startsWith(" ")) {
 					time2 = Character.toString(secondTime[1]);
 				}
-				//System.out.println("I'm on this entry: " + conflictList.get(i).toString());
+				System.out.println("I'm on this entry: " + conflictList.get(i).toString());
 
 				int startHour = Integer.parseInt(time);
 				int endHour = Integer.parseInt(time2);

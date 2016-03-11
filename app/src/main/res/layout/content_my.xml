@@ -55,7 +55,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_height="wrap_content"
         android:text="@string/button_send"
-        android:onClick="sendMessage" />/>
+        android:onClick="sendMessage" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/wentWorthImage"
+        android:src= "@drawable/wentworth"/>/>
 
 
 

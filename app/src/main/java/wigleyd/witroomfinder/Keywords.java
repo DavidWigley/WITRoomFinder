@@ -24,7 +24,7 @@ public class Keywords {
 	public static final String[] blank = {""};//should actually serve a purpose not actually garbage
 	
 	//essential
-	String[] regex = {"WIT	", "ENGR", "LITR"};
+	public static final String[] regex = {"WIT	", "ENGR", "LITR", "NR"};
 
 //	//stuff that used to be in the regex. Dont need it anymore, will chop once I'm sure
 //	String[] specificProblems = {"COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
