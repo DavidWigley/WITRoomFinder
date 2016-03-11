@@ -7,10 +7,10 @@ public class MyHandler {
 	private static final int DEFAULT_HOUR = 0;
 	private static final int DEFAULT_MINUTE=0;
 
-	Keywords words = new Keywords();
-	Search search;
-	String building, buildingPass;
-	String[]day, stringToUpdate;
+	private Keywords words = new Keywords();
+	private Search search;
+	private String building, buildingPass;
+	private String[]day, stringToUpdate;
 	int currentHour, currentMinute;
 	private static final String[]buildingChoices = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
 			"Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willison Hall", "Williston Hall"};
