@@ -23,6 +23,7 @@ public class Search {
 			//adds all the elements in the text file to the array conflictList
 			conflictList.add(reader.nextLine());
 		}
+		reader.close();
 	}
 
 	/**
@@ -64,10 +65,12 @@ public class Search {
 			} else {
 				boolean hasDay = false;
 				for (int j = 0; j < day.length; j++) {
+					//System.out.println("Checking if " + currentEntry + "contains " + day);
 					if (currentEntry.contains(day[j])) {
 						hasDay = true;
 						//add the class to the detailed list because its in the same building on same day.
 						detailedRooms.add(currentEntry);
+						//System.out.println("Added this guy: "+ currentEntry);
 						break;
 					}
 				}
@@ -100,7 +103,8 @@ public class Search {
 				if (time2.startsWith(" ")) {
 					time2 = Character.toString(secondTime[1]);
 				}
-				System.out.println("I'm on this entry: " + conflictList.get(i).toString());
+				//debug print
+				//System.out.println("I'm on this entry: " + conflictList.get(i).toString());
 
 				int startHour = Integer.parseInt(time);
 				int endHour = Integer.parseInt(time2);
