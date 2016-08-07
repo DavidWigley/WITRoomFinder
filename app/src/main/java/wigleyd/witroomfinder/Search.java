@@ -7,6 +7,7 @@ public class Search {
 
 	private Scanner reader;
 	private ArrayList conflictList = new ArrayList();
+	private ArrayList rawScannerData = new ArrayList();
 	protected ArrayList results = new ArrayList();
 	private ArrayList allClassrooms = new ArrayList();
 
@@ -18,12 +19,25 @@ public class Search {
 		reader = new Scanner(input);
 	}
 
-	private void getEntries(){
-		while(reader.hasNextLine()){
-			//adds all the elements in the text file to the array conflictList
-			conflictList.add(reader.nextLine());
+	private void getEntries() {
+		//additional redundancy check dont really need
+		if (conflictList.isEmpty() && rawScannerData.isEmpty()) {
+			while (reader.hasNextLine()) {
+				//adds all the elements in the text file to the array conflictList
+				conflictList.add(reader.nextLine());
+			}
+			reader.close();
 		}
-		reader.close();
+	}
+
+	public ArrayList getRawScannerData(){
+		return rawScannerData;
+	}
+
+	//Method that will allow bypass of constantly reading with scanner
+	public void setConflictList(ArrayList rawList) {
+		rawScannerData = rawList;
+		conflictList = rawList;
 	}
 
 	/**
@@ -37,6 +51,7 @@ public class Search {
 				conflictList.set(i, conflictList.get(i).toString().replace(keys[j], ""));
 			}
 		}
+		rawScannerData = conflictList;
 		conflictList = trimUpToDay(conflictList);
 	}
 

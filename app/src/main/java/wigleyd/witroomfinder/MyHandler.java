@@ -36,6 +36,19 @@ public class MyHandler {
 		getUpdatedListings();
 	}
 
+	public MyHandler(String building, String day,InputStream input, ArrayList scannerData) {
+		this.building = building;
+		decipherDay(day);
+		currentHour = DEFAULT_HOUR;
+		currentMinute = DEFAULT_MINUTE;
+		search = new Search(input);
+		search.setConflictList(scannerData);
+		fixStrings();
+		performSearch();
+		getUpdatedListings();
+	}
+
+
 	public void performSearch() {
 		search.findEntries(buildingPass, day, currentHour, currentMinute);
 	}
@@ -120,4 +133,5 @@ public class MyHandler {
 	public ArrayList getDetailedRooms(){
 		return search.getDetailedRooms();
 	}
+	public ArrayList getRawScannerData() {return  search.getRawScannerData();}
 }
