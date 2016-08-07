@@ -20,7 +20,7 @@ public class Search {
 	}
 
 	private void getEntries() {
-		//additional redundancy check dont really need
+		//additional redundancy check dont really need. One condition check should be OK
 		if (conflictList.isEmpty() && rawScannerData.isEmpty()) {
 			while (reader.hasNextLine()) {
 				//adds all the elements in the text file to the array conflictList

@@ -31,7 +31,8 @@ public class ClassDetailsActivity extends Activity {
         InputStream inputStream = null;
         try {
             //inputStream = manager.open("fall2015.txt");
-            inputStream = manager.open("spring2016.txt");
+            inputStream = manager.open("summer2016.txt");
+            //be wary file is specified in 2 locations. ResultsActivity and ClassDetailsActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,6 +40,7 @@ public class ClassDetailsActivity extends Activity {
         String classroom = intent.getStringExtra(ResultsActivity.CLASSROOM_STRING);
         String day = intent.getStringExtra(ResultsActivity.DAY_STRING);
         hour = intent.getIntExtra(ResultsActivity.HOUR_STRING,0);
+
         MyHandler myHandler = new MyHandler(classroom,day,inputStream);
         myHandler.skipTimeSearch();
         Classroom specificClassroom = new Classroom(true, classroom);
