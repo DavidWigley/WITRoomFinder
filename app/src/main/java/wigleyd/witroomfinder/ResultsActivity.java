@@ -40,7 +40,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         InputStream inputStream = null;
         try {
             //inputStream = manager.open("fall2015.txt");
-            inputStream = manager.open("summer2016.txt");
+            inputStream = manager.open("fall2016.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,7 +70,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         inputStream = null;
         try {
             //inputStream = manager.open("fall2015.txt");
-            inputStream = manager.open("summer2016.txt");
+            inputStream = manager.open("fall2016.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }

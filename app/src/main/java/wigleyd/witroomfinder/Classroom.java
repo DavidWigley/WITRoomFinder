@@ -52,7 +52,7 @@ public class Classroom {
 //            System.out.println("My end times are " + endTimes.get(i).toString());
 //        }
         if (startTimes.isEmpty()) {
-            return "∞. MAY NOT BE REAL CLASSROOM";
+            return "∞. MAY NOT BE A REAL CLASSROOM";
         } else {
             //fault protection something tripped after WENTW207. Odd
             if (nearestTime >= startTimes.size()) {

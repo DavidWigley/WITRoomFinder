@@ -35,17 +35,17 @@ public class ClassroomList extends ArrayAdapter<Classroom>{
         TextView name = (TextView)view.findViewById(R.id.name);
         name.setText(classroom.getName());
         // Set comment
-        TextView avaiable = (TextView) view.findViewById(R.id.open);
+        TextView available = (TextView) view.findViewById(R.id.open);
         String text = "";
         if(classroom.isOpen()){
             //need way to show next available time
             text = "Available until: " + classroom.getAvailability();
-            avaiable.setTextColor(ContextCompat.getColor(context, R.color.green));
+            available.setTextColor(ContextCompat.getColor(context, R.color.green));
         } else {
             text = "Occupied until: " + classroom.getAvailability();
-            avaiable.setTextColor(ContextCompat.getColor(context, R.color.red));
+            available.setTextColor(ContextCompat.getColor(context, R.color.red));
         }
-        avaiable.setText(text);
+        available.setText(text);
         return view;
     }
 }

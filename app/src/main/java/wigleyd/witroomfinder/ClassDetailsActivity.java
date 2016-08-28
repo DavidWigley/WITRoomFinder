@@ -31,8 +31,8 @@ public class ClassDetailsActivity extends Activity {
         InputStream inputStream = null;
         try {
             //inputStream = manager.open("fall2015.txt");
-            inputStream = manager.open("summer2016.txt");
-            //be wary file is specified in 2 locations. ResultsActivity and ClassDetailsActivity
+            inputStream = manager.open("fall2016.txt");
+            //be wary file is specified in 3 locations. 2 ResultsActivity and ClassDetailsActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
