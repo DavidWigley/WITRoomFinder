@@ -145,7 +145,7 @@ public class ClassDetailsActivity extends Activity {
                     break;
                 }
             }
-            if (sortedTime[sorted] < hour){
+            if (sortedTime[sorted] <= hour){
                 colorThisMany++;
             }
         }
