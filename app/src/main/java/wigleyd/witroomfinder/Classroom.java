@@ -44,6 +44,13 @@ public class Classroom {
 
 
     public String getAvailability() {
+        System.out.println("MY name is " + getName());
+        for (int i =0; i < startTimes.size(); i++) {
+            System.out.println("My start times are " + startTimes.get(i).toString());
+        }
+        for (int i =0; i < endTimes.size(); i++) {
+            System.out.println("My end times are " + endTimes.get(i).toString());
+        }
         if (startTimes.isEmpty()) {
             return "Forever";
         } else {
@@ -58,7 +65,15 @@ public class Classroom {
             }
             if (timeWanted < closestHour) {
                 //ie its currently open so I get the start time
-                available = closestHour;
+                if (isOpen()) {
+                    available = closestHour;
+                }else if (!isOpen()) {
+                    //verifying array is not out of bounds
+                    if (nearestTime !=0) {
+                        closestHour = Integer.parseInt(endTimes.get(nearestTime-1).toString());
+                        available = closestHour;
+                    }
+                }
             } else {
                 //its currently taken so I get the later time
                 available = Integer.parseInt(endTimes.get(nearestTime).toString());
@@ -103,4 +118,6 @@ public class Classroom {
     public String getOriginal() {
         return original;
     }
+
+    public int returnTimeIndex(){return nearestTime;}
 }

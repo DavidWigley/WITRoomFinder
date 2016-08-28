@@ -64,16 +64,16 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         TwoDimensionalArrayList<String> endingTimeResultString = new TwoDimensionalArrayList<String>();
         myHandler = null;
         inputStream = null;
-        //this is terrible
+        try {
+            //inputStream = manager.open("fall2015.txt");
+            inputStream = manager.open("summer2016.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //This is sorta shitty I don't like constantly reading the file over and over but... eh whatever, avg guy won't care.
+        //Ok now it doesn't reread all that data, I changed it. It annoyed me too much. I read once then pass it everytime. More efficient.
+        //this is still somewhat terrible. Its optimized terrible
         for (int i = 0; i < allClassrooms.size(); i++,timeIndexer++) {
-            try {
-                //inputStream = manager.open("fall2015.txt");
-                inputStream = manager.open("summer2016.txt");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //This is sorta shitty I don't like constantly reading the file over and over but... eh whatever, avg guy won't care.
-            //Ok now it doesn't reread all that data, I changed it. It annoyed me too much. I read once then pass it everytime. More efficient.
             MyHandler individualHandler = new MyHandler(allClassrooms.get(i).toString(),day,inputStream,rawScannerData);
             individualHandler.skipTimeSearch();
             ArrayList rawResultsList = individualHandler.getDetailedRooms();
@@ -83,24 +83,21 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
             //Ok I add all the time results to a two dimensional arrayList. First index is a classroom, second is a time entry
             for (int k =0; k <timesList.size(); k++){
-                System.out.println("Raw time is "  + timesList.get(k).toString());
                 char[] startingHoursArray = {timesList.get(k).toString().charAt(0), timesList.get(k).toString().charAt(1)};
                 String startHour = Character.toString(startingHoursArray[0]) + Character.toString(startingHoursArray[1]);
                 startingTimeResultString.addToInnerArray(i,k,startHour);
-                System.out.println("Said the start time was " + startHour);
 
                 char[] endingHoursArray = {timesList.get(k).toString().charAt(9), timesList.get(k).toString().charAt(10)};
-                //Is this a bug??????????????????????????????? IT WAS!!!
                 String endHour = Character.toString(endingHoursArray[0]) + Character.toString(endingHoursArray[1]);
                 int endTime = Integer.parseInt(endHour);
                 //Checking if the times is ##:50 which basically means it rounds up
+                //technically this comparison should be switched whatever doesnt matter
                 if ("5".equalsIgnoreCase(String.valueOf(timesList.get(k).toString().charAt(12)))) {
                     endTime++;
                 }
-                System.out.println("Said the end time was " + endTime);
                 endingTimeResultString.addToInnerArray(i,k,Integer.toString(endTime));
-
             }
+
             boolean open = false;
             for (int j = 0; j < results.size(); j++) {
                 if (allClassrooms.get(i).toString().contains(results.get(j).toString())) {
@@ -126,10 +123,6 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
             }else {
                 index = i;
             }
-//            System.out.println("I passed:  " + nearestTimeIndex[i]);
-//            System.out.println("classroom size " + allClassrooms.size());
-//            System.out.println("Starting timeResult String size " + startingTimeResultString.size());
-//            System.out.println("Ending timeResult String size " + endingTimeResultString.size());
             classroomList.add(new Classroom(open, allClassrooms.get(i).toString(), startingTimeResultString.get(index),endingTimeResultString.get(index), hour, nearestTimeIndex[i]));
             // Create ListItemAdapter
             ClassroomList adapter;
@@ -243,9 +236,9 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
                     break;
                 }
             }
-            System.out.println("I am currently comparing " + sortedTime[sorted] + " and " + hour);
+            //System.out.println("I am currently comparing " + sortedTime[sorted] + " and " + hour);
             if (sortedTime[sorted] < hour){
-                System.out.println("I said yes and added one");
+                //System.out.println("I said yes and added one");
                 //System.out.println("I am manipulating the color this many ");
                 //THERE IS A BUG WITH THIS LOGIC!!!
                 nearestTimeIndex[timeIndexer]++;
