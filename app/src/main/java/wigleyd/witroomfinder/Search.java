@@ -85,7 +85,7 @@ public class Search {
 						hasDay = true;
 						//add the class to the detailed list because its in the same building on same day.
 						detailedRooms.add(currentEntry);
-						//System.out.println("Added this guy: "+ currentEntry);
+						//System.out.println("Added this guy: "+ currentEntry + " bc day");
 						break;
 					}
 				}
@@ -150,6 +150,7 @@ public class Search {
 					tripped = true;
 				}
 				if (tripped) {
+					//System.out.println("removed this guy " + conflictList.get(i).toString() + " bc time");
 					conflictList.remove(i);
 					i--;
 					tripped = false;

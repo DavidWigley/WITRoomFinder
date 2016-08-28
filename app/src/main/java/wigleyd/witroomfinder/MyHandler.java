@@ -46,6 +46,7 @@ public class MyHandler {
 		fixStrings();
 		performSearch();
 		getUpdatedListings();
+		//search.printEntries();
 	}
 
 

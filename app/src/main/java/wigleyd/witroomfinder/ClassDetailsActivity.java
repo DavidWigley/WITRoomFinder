@@ -57,6 +57,9 @@ public class ClassDetailsActivity extends Activity {
         ll.setOrientation(LinearLayout.VERTICAL);
         sv.addView(ll);
         TextView firstBox = new TextView(this);
+        if (hour >12) {
+            hour-=12;//revert back to standard
+        }
         firstBox.setText("The classroom: " + roomName + " on " + day + " has these classes." + "\n"
             + "The times that have past " + hour + " are shaded red.");
         ll.addView(firstBox);
