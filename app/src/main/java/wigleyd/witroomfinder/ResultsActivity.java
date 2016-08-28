@@ -118,10 +118,14 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
             if (timesList.size() == 0) {
                 index = 0;
                 startingTimeResultString.add(0,new ArrayList<String>());
+                endingTimeResultString.add(0,new ArrayList<String>());
             }else {
                 index = i;
             }
-            System.out.println("I passed:  " + nearestTimeIndex[i]);
+//            System.out.println("I passed:  " + nearestTimeIndex[i]);
+//            System.out.println("classroom size " + allClassrooms.size());
+//            System.out.println("Starting timeResult String size " + startingTimeResultString.size());
+//            System.out.println("Ending timeResult String size " + endingTimeResultString.size());
             classroomList.add(new Classroom(open, allClassrooms.get(i).toString(), startingTimeResultString.get(index),endingTimeResultString.get(index), hour, nearestTimeIndex[i]));
             // Create ListItemAdapter
             ClassroomList adapter;
