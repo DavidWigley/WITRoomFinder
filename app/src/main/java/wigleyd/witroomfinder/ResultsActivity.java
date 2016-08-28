@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -61,8 +60,8 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
         final List<Classroom> classroomList = new ArrayList<Classroom>();
         ArrayList timesList;
-        TwoDimentionalArrayList<String> startingTimeResultString = new TwoDimentionalArrayList<String>();
-        TwoDimentionalArrayList<String> endingTimeResultString = new TwoDimentionalArrayList<String>();
+        TwoDimensionalArrayList<String> startingTimeResultString = new TwoDimensionalArrayList<String>();
+        TwoDimensionalArrayList<String> endingTimeResultString = new TwoDimensionalArrayList<String>();
         myHandler = null;
         inputStream = null;
         for (int i = 0; i < allClassrooms.size(); i++,timeIndexer++) {

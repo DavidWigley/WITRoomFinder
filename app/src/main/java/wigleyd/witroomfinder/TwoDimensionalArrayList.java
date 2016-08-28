@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by david on 8/6/2016.
  */
 
-class TwoDimentionalArrayList<T> extends ArrayList<ArrayList<T>> {
+class TwoDimensionalArrayList<T> extends ArrayList<ArrayList<T>> {
 
     public void addToInnerArray(int index, T element) {
         while (index >= this.size()) {
