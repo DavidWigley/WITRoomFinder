@@ -64,6 +64,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         TwoDimensionalArrayList<String> endingTimeResultString = new TwoDimensionalArrayList<String>();
         myHandler = null;
         inputStream = null;
+        //this is terrible
         for (int i = 0; i < allClassrooms.size(); i++,timeIndexer++) {
             try {
                 //inputStream = manager.open("fall2015.txt");
@@ -82,17 +83,21 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
             //Ok I add all the time results to a two dimensional arrayList. First index is a classroom, second is a time entry
             for (int k =0; k <timesList.size(); k++){
+                System.out.println("Raw time is "  + timesList.get(k).toString());
                 char[] startingHoursArray = {timesList.get(k).toString().charAt(0), timesList.get(k).toString().charAt(1)};
                 String startHour = Character.toString(startingHoursArray[0]) + Character.toString(startingHoursArray[1]);
                 startingTimeResultString.addToInnerArray(i,k,startHour);
+                System.out.println("Said the start time was " + startHour);
 
                 char[] endingHoursArray = {timesList.get(k).toString().charAt(9), timesList.get(k).toString().charAt(10)};
-                String endHour = Character.toString(startingHoursArray[0]) + Character.toString(startingHoursArray[1]);
+                //Is this a bug??????????????????????????????? IT WAS!!!
+                String endHour = Character.toString(endingHoursArray[0]) + Character.toString(endingHoursArray[1]);
                 int endTime = Integer.parseInt(endHour);
                 //Checking if the times is ##:50 which basically means it rounds up
                 if ("5".equalsIgnoreCase(String.valueOf(timesList.get(k).toString().charAt(12)))) {
                     endTime++;
                 }
+                System.out.println("Said the end time was " + endTime);
                 endingTimeResultString.addToInnerArray(i,k,Integer.toString(endTime));
 
             }
@@ -238,7 +243,9 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
                     break;
                 }
             }
+            System.out.println("I am currently comparing " + sortedTime[sorted] + " and " + hour);
             if (sortedTime[sorted] < hour){
+                System.out.println("I said yes and added one");
                 //System.out.println("I am manipulating the color this many ");
                 //THERE IS A BUG WITH THIS LOGIC!!!
                 nearestTimeIndex[timeIndexer]++;
