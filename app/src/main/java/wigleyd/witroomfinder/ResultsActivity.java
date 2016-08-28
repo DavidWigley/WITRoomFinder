@@ -239,7 +239,8 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
                 }
             }
             if (sortedTime[sorted] < hour){
-                System.out.println("I am manipulating the color this many ");
+                //System.out.println("I am manipulating the color this many ");
+                //THERE IS A BUG WITH THIS LOGIC!!!
                 nearestTimeIndex[timeIndexer]++;
             }
         }
