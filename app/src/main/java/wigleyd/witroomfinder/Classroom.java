@@ -15,7 +15,7 @@ public class Classroom {
     private ArrayList startTimes, endTimes;
     private int timeWanted, nearestTime;
     private int available;
-    private boolean debug = true;
+    private boolean debug = false;
 
     public Classroom(boolean open, Building building, String room) {
         this.open = open;
@@ -161,29 +161,46 @@ public class Classroom {
         return oldValue; //safeGuard against failures
     }
 
-    public void getDuration(int beginningTime){
+    /**
+     * This is unfinished but honestly I'm not sure if its worth doing this. Just adds more complexity and more sliders.
+     * I'm going to stop work on this, but will keep what I have incase I want to resume.
+     * @return
+     */
+    /*public String getDuration(int beginningTime){
         if (beginningTime >=1 && beginningTime <=7) {
             beginningTime+=12;//24hr conversion
         }
         int nextTime;
         if (nearestTime != startTimes.size()) {
+            System.out.println("First loop");
             nextTime = Integer.parseInt(startTimes.get(nearestTime).toString());
         }else {
-            nextTime = 0;//Never open?
+            nextTime = 0;//Never open? Actually there are no more classes after the next opening
+            System.out.println("2nd loop");
             if(debug)System.out.println("Attempting exit");
-            return;
+            return "Forever after last class";
         }
         if (nextTime >=1 && nextTime <=7) {
             nextTime+=12;
         }
         if (beginningTime > nextTime){
-            if (nearestTime <= startTimes.size() -1){
+            System.out.println("3rd loop");
+            if (nearestTime < startTimes.size() -1){
                 nearestTime+=1;
+                System.out.println("3rd sub loop");
                 nextTime = Integer.parseInt(startTimes.get(nearestTime).toString());
             }
         }
-        if(debug)System.out.println("My original was " + beginningTime + " my next is " + nextTime);
-    }
+        if (beginningTime > nextTime) {
+            //alright so I'm pulling literally the last entry so I do the same return
+            System.out.println("Failsafe loop");
+            return "Forever after last class";
+        }
+        System.out.println("My original was " + beginningTime + " my next is " + nextTime);
+        System.out.println("The difference is " + (nextTime-beginningTime));
+        return Integer.toString(nextTime-beginningTime);
+    }*/
+
     public Building getBuilding() {
         return building;
     }
