@@ -41,7 +41,7 @@ public class ClassDetailsActivity extends Activity {
         String day = intent.getStringExtra(ResultsActivity.DAY_STRING);
         hour = intent.getIntExtra(ResultsActivity.HOUR_STRING,0);
 
-        MyHandler myHandler = new MyHandler(classroom,day,inputStream);
+        MyHandler myHandler = new MyHandler(classroom,day,inputStream,hour);
         myHandler.skipTimeSearch();
         Classroom specificClassroom = new Classroom(true, classroom);
         String roomName = specificClassroom.getName();

@@ -37,14 +37,20 @@ public class ClassroomList extends ArrayAdapter<Classroom>{
         // Set comment
         TextView available = (TextView) view.findViewById(R.id.open);
         String text = "";
+        String time = classroom.getAvailability();
         if(classroom.isOpen()){
             //need way to show next available time
-            text = "Available until: " + classroom.getAvailability();
+            text = "Available until: " + time;
             available.setTextColor(ContextCompat.getColor(context, R.color.green));
         } else {
-            text = "Occupied until: " + classroom.getAvailability();
+            text = "Occupied until: " + time;
             available.setTextColor(ContextCompat.getColor(context, R.color.red));
         }
+//        if (time.contains("∞")){
+//            System.out.println("Infinity duration");
+//        }else {
+//            classroom.getDuration(Integer.parseInt(time));
+//        }
         available.setText(text);
         return view;
     }

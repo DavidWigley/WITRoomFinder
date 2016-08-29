@@ -51,13 +51,13 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         day = intent.getStringExtra(MyActivity.DAY_STRING);
         hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
-
+        System.out.println("I am passing " + building);
         MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
         if (hour >= 1 && hour <= 7) {
             hour += 12;//convert to mil time
         }
         ArrayList rawScannerData = myHandler.getRawScannerData();
-        ArrayList results = myHandler.getResults();
+        ArrayList results = myHandler.getFinalResults();
         allClassrooms = myHandler.getAllClassrooms();
         nearestTimeIndex = new int[allClassrooms.size()];
         setClassrooms(allClassrooms);
@@ -78,7 +78,7 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         //Ok now it doesn't reread all that data, I changed it. It annoyed me too much. I read once then pass it everytime. More efficient.
         //this is still somewhat terrible. Its optimized terrible
         for (int i = 0; i < allClassrooms.size(); i++, timeIndexer++) {
-            MyHandler individualHandler = new MyHandler(allClassrooms.get(i).toString(), day, inputStream, rawScannerData);
+            MyHandler individualHandler = new MyHandler(allClassrooms.get(i).toString(), day, inputStream, rawScannerData,hour, minute);
             individualHandler.skipTimeSearch();
             ArrayList rawResultsList = individualHandler.getDetailedRooms();
             timesList = getTrimmedResults(rawResultsList);
@@ -105,8 +105,10 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
 
             boolean open = false;
             for (int j = 0; j < results.size(); j++) {
+                System.out.println("I am checking if " + results.get(j).toString() + " equals " +  allClassrooms.get(i).toString());
                 if (allClassrooms.get(i).toString().contains(results.get(j).toString())) {
                     //its open
+
                     open = true;
                     break;
                 } else if (!allClassrooms.get(i).toString().contains(results.get(j).toString())) {

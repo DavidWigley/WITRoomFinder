@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class MyHandler {
-	private static final int DEFAULT_HOUR = 0;
 	private static final int DEFAULT_MINUTE=0;
 
 	private Keywords words = new Keywords();
@@ -12,6 +11,7 @@ public class MyHandler {
 	private String building, buildingPass;
 	private String[]day, stringToUpdate;
 	int currentHour, currentMinute;
+	private boolean initialRun = true;
 	private static final String[]buildingChoices = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
 			"Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willison Hall", "Williston Hall"};
 
@@ -25,10 +25,10 @@ public class MyHandler {
 		performSearch();
 		getUpdatedListings();
 	}
-	public MyHandler(String building, String day,InputStream input) {
+	public MyHandler(String building, String day,InputStream input, int hour) {
 		this.building = building;
 		decipherDay(day);
-		currentHour = DEFAULT_HOUR;
+		currentHour = hour;
 		currentMinute = DEFAULT_MINUTE;
 		search = new Search(input);
 		fixStrings();
@@ -36,11 +36,11 @@ public class MyHandler {
 		getUpdatedListings();
 	}
 
-	public MyHandler(String building, String day,InputStream input, ArrayList scannerData) {
+	public MyHandler(String building, String day,InputStream input, ArrayList scannerData, int currentHour, int currentMinute) {
 		this.building = building;
 		decipherDay(day);
-		currentHour = DEFAULT_HOUR;
-		currentMinute = DEFAULT_MINUTE;
+		this.currentHour = currentHour;
+		this.currentMinute = currentMinute;
 		search = new Search(input);
 		search.setConflictList(scannerData);
 		fixStrings();
@@ -51,7 +51,9 @@ public class MyHandler {
 
 
 	public void performSearch() {
+		//fuck you this such a shitty bug
 		search.findEntries(buildingPass, day, currentHour, currentMinute);
+		//System.out.println("I am looking for " + buildingPass);
 	}
 
 	public void fixStrings() {
@@ -93,12 +95,17 @@ public class MyHandler {
 			stringToUpdate = words.willistonHall;
 		}else {
 			buildingPass = building;
+			initialRun = false; //signals I am doing detailed searches. Just trust current Dave. Fixes some bugs
 			stringToUpdate = words.blank;
 		}
 	}
 
 	public void getUpdatedListings() {
-		search.updateListings(stringToUpdate);
+		if (initialRun){
+			search.updateListings(stringToUpdate);
+		}else{
+			search.updateListings(stringToUpdate, false);
+		}
 	}
 
 	/**
@@ -135,4 +142,7 @@ public class MyHandler {
 		return search.getDetailedRooms();
 	}
 	public ArrayList getRawScannerData() {return  search.getRawScannerData();}
+	public ArrayList getFinalResults(){
+		return search.getFinalResults();
+	}
 }
