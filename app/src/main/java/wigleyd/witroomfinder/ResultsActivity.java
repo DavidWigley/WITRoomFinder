@@ -52,10 +52,11 @@ public class ResultsActivity extends Activity implements View.OnClickListener {
         hour = Integer.parseInt(hourString);
         int minute = Integer.parseInt(minuteString);
 
-        MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
         if (hour >= 1 && hour <= 7) {
             hour += 12;//convert to mil time
         }
+        MyHandler myHandler = new MyHandler(building, day, hour, minute, inputStream);
+
         ArrayList rawScannerData = myHandler.getRawScannerData();
         ArrayList results = myHandler.getResults();
         allClassrooms = myHandler.getAllClassrooms();

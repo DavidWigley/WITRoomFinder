@@ -118,18 +118,26 @@ public class Search {
 				if (time2.startsWith(" ")) {
 					time2 = Character.toString(secondTime[1]);
 				}
-				//debug print
-				//System.out.println("I'm on this entry: " + conflictList.get(i).toString());
 
 				int startHour = Integer.parseInt(time);
 				int endHour = Integer.parseInt(time2);
-				int delta = (endHour - startHour);
-				if (startHour <= 12 && endHour >= 1 && endHour < startHour) {
-					//basically it went past 1 so I put it in military time to get a clean subtraction
-					delta = endHour + 12 - startHour;
+
+				//dump everything into military time
+				if (startHour >=1 && startHour <=7){
+					startHour+=12;
 				}
+				if (endHour >=1 && endHour <=7){
+					endHour+=12;
+				}
+				int delta = (endHour - startHour);
+//				if (startHour <= 12 && endHour >= 1 && endHour < startHour) {
+//					//basically it went past 1 so I put it in military time to get a clean subtraction
+//					delta = endHour + 12 - startHour;
+//					startHour +=12;
+//				}  IDK WTF I WAS DOING HERE. Somehow this shit worked for almost everything though
 				delta++;
 				//add one because most classes end at 50, or 45 so Ill just round
+				//System.out.println(currentEntry + " Start hour: " + startHour + " Current Hour: " + currentHour + " delta: " + delta);
 				if (startHour <= currentHour && startHour >= currentHour - delta) {
 					//a class started around this time
 					if (endHour >= currentHour) {
