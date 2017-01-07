@@ -22,6 +22,8 @@ public class Keywords {
 	public static final String[] willistonHall = {"WLSTN 001"};
 	public static final String[] willisonHall = {"WILLS 102", "WILLS 103", "WILLS 105"};
 	public static final String[] blank = {""};//should actually serve a purpose not actually garbage
+
+	public static final String currentTerm = "spring2017.txt";
 	
 	//essential
 	public static final String[] regex = {"WIT	", "ENGR", "LITR", "NR"};

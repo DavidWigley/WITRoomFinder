@@ -31,7 +31,7 @@ public class ClassDetailsActivity extends Activity {
         InputStream inputStream = null;
         try {
             //inputStream = manager.open("fall2015.txt");
-            inputStream = manager.open("fall2016.txt");
+            inputStream = manager.open(Keywords.currentTerm);
             //be wary file is specified in 3 locations. 2 ResultsActivity and ClassDetailsActivity
         } catch (IOException e) {
             e.printStackTrace();
