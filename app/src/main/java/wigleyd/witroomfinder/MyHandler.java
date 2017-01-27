@@ -87,7 +87,7 @@ public class MyHandler {
 			stringToUpdate = words.wentworthHall;
 		}else if (building.equalsIgnoreCase(buildingChoices[10])){
 			buildingPass = "WILLS";
-			stringToUpdate = words.willisonHall;
+			stringToUpdate = words.willsonHall;
 		}else if (building.equalsIgnoreCase(buildingChoices[11])){
 			buildingPass = "WLSTN";
 			stringToUpdate = words.willistonHall;

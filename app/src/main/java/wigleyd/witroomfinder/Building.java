@@ -1,8 +1,6 @@
 package wigleyd.witroomfinder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by frascog on 2/22/16.
@@ -19,7 +17,7 @@ public enum Building {
     Waston_Hall,
     Rubenstein,
     Williston_Hall,
-    Willison_Hall,
+    Willson_Hall,
     blank;
 
 
@@ -54,8 +52,8 @@ public enum Building {
             return Rubenstein;
         } else if(contains(building,Keywords.willistonHall)){
             return Williston_Hall;
-        } else if(contains(building,Keywords.willisonHall)){
-            return Willison_Hall;
+        } else if(contains(building,Keywords.willsonHall)){
+            return Willson_Hall;
         } else {
             return blank;
         }

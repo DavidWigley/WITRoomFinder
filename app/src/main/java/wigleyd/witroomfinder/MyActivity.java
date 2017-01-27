@@ -1,6 +1,5 @@
 package wigleyd.witroomfinder;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.view.View.OnClickListener;
 
@@ -28,7 +26,7 @@ public class MyActivity extends AppCompatActivity implements AdapterView.OnItemS
 
     private Spinner buildingSpinner, daySpinner, hourSpinner;
     private static final String[] buildings = {"Annex Central", "Annex North", "Annex South", "Beatty", "Dobbs Hall",
-            "Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willison Hall", "Williston Hall"};
+            "Ira Allen", "Kingman Hall", "Rubenstein Hall", "Watson Hall", "Wentworth Hall", "Willson Hall", "Williston Hall"};
     private static final String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
     //I can do 1-12 because classes start at 8am and at 8pm so no need to use 24hr format
     private static final String[] hourChoices = {"8am","9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm","6pm","7pm"};

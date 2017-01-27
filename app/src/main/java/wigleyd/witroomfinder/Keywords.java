@@ -20,7 +20,7 @@ public class Keywords {
 	public static final String[] wastonHall = {"WATSN 001", "WATSN 002", "WATSN 004", "WATSN 006"};
 	public static final String[] rubenstein = {"RBSTN 005", "RBSTN 101", "RBSTN 103", "RBSTN 104", "RBSTN 105", "RBSTN 201"};
 	public static final String[] willistonHall = {"WLSTN 001"};
-	public static final String[] willisonHall = {"WILLS 102", "WILLS 103", "WILLS 105"};
+	public static final String[] willsonHall = {"WILLS 102", "WILLS 103", "WILLS 105"};
 	public static final String[] blank = {""};//should actually serve a purpose not actually garbage
 
 	public static final String currentTerm = "spring2017.txt";
