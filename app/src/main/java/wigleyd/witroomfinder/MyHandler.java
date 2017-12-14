@@ -7,7 +7,6 @@ public class MyHandler {
 	private static final int DEFAULT_HOUR = 0;
 	private static final int DEFAULT_MINUTE=0;
 
-	private Keywords words = new Keywords();
 	private Search search;
 	private String building, buildingPass;
 	private String[]day, stringToUpdate;
@@ -57,43 +56,43 @@ public class MyHandler {
 	public void fixStrings() {
 		if (building.equalsIgnoreCase(buildingChoices[0])) {
 			buildingPass = "ANXCN";
-			stringToUpdate = words.annexCentral;
+			stringToUpdate = Keywords.annexCentral;
 		}else if (building.equalsIgnoreCase(buildingChoices[1])){
 			buildingPass = "ANXNO";
-			stringToUpdate = words.annexNorth;
+			stringToUpdate = Keywords.annexNorth;
 		}else if (building.equalsIgnoreCase(buildingChoices[2])){
 			buildingPass = "ANXSO";
-			stringToUpdate = words.annexSouth;
+			stringToUpdate = Keywords.annexSouth;
 		}else if (building.equalsIgnoreCase(buildingChoices[3])){
 			buildingPass = "BEATT";
-			stringToUpdate = words.beatty;
+			stringToUpdate = Keywords.beatty;
 		}else if (building.equalsIgnoreCase(buildingChoices[4])){
 			buildingPass = "DOBBS";
-			stringToUpdate = words.dobbsHall;
+			stringToUpdate = Keywords.dobbsHall;
 		}else if (building.equalsIgnoreCase(buildingChoices[5])){
 			buildingPass = "IRALL";
-			stringToUpdate = words.iraAllen;
+			stringToUpdate = Keywords.iraAllen;
 		}else if (building.equalsIgnoreCase(buildingChoices[6])){
 			buildingPass = "KNGMN";
-			stringToUpdate = words.kingman;
+			stringToUpdate = Keywords.kingman;
 		}else if (building.equalsIgnoreCase(buildingChoices[7])){
 			buildingPass = "RBSTN";
-			stringToUpdate = words.rubenstein;
+			stringToUpdate = Keywords.rubenstein;
 		}else if (building.equalsIgnoreCase(buildingChoices[8])){
 			buildingPass = "WATSN";
-			stringToUpdate = words.wastonHall;
+			stringToUpdate = Keywords.wastonHall;
 		}else if (building.equalsIgnoreCase(buildingChoices[9])) {
 			buildingPass = "WENTW";
-			stringToUpdate = words.wentworthHall;
+			stringToUpdate = Keywords.wentworthHall;
 		}else if (building.equalsIgnoreCase(buildingChoices[10])){
 			buildingPass = "WILLS";
-			stringToUpdate = words.willsonHall;
+			stringToUpdate = Keywords.willsonHall;
 		}else if (building.equalsIgnoreCase(buildingChoices[11])){
 			buildingPass = "WLSTN";
-			stringToUpdate = words.willistonHall;
+			stringToUpdate = Keywords.willistonHall;
 		}else {
 			buildingPass = building;
-			stringToUpdate = words.blank;
+			stringToUpdate = Keywords.blank;
 		}
 	}
 
@@ -107,15 +106,15 @@ public class MyHandler {
 	 */
 	public void decipherDay(String input) {
 		if (input.equalsIgnoreCase("Monday")) {
-			day = words.getMondayCases();
+			day = Keywords.getMondayCases();
 		}else if (input.equalsIgnoreCase("Tuesday")) {
-			day = words.getTuesdayCases();
+			day = Keywords.getTuesdayCases();
 		}else if (input.equalsIgnoreCase("Wednesday")) {
-			day = words.getWednesdayCases();
+			day = Keywords.getWednesdayCases();
 		}else if (input.equalsIgnoreCase("Thursday")) {
-			day = words.getThursdayCases();
+			day = Keywords.getThursdayCases();
 		}else if (input.equalsIgnoreCase("Friday")){
-			day = words.getFridayCases();
+			day = Keywords.getFridayCases();
 		}else {
 
 		}

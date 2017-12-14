@@ -23,7 +23,7 @@ public class Keywords {
 	public static final String[] willsonHall = {"WILLS 102", "WILLS 103", "WILLS 105"};
 	public static final String[] blank = {""};//should actually serve a purpose not actually garbage
 
-	public static final String currentTerm = "spring2017.txt";
+	public static final String currentTerm = "spring2018.txt";
 	
 	//essential
 	public static final String[] regex = {"WIT	", "ENGR", "LITR", "NR"};
@@ -32,28 +32,28 @@ public class Keywords {
 //	String[] specificProblems = {"COOP EDUCATION 1:", "COOP EDUCATION 2:", "VISUALIZATION 3:", "CAD 2:", "VISUAL PERCEPTION OF THE CITY:",
 //			"MYTH AMERICA:", "VISUALIZATION 2: ADV PRSPECTIV", "CAD 1: SURSURFACE MODELING\tT", "DESIGN PERSP: TOPICS IN HISTOR"};
 
-	String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
+	static String[] mondayCases = {"	M	","	MT", "	MW", "	MR", "	MF"};
 
-	String[] tuesdayCases = {"	MT", "	T	",  "	TW", "TR	","TF	"};
-	String[] wednesdayCases = {"	W	", "	MW", "	MTW", "	TW", "	WR", "	WRF	"};
-	String[] thursdayCases = {"R	", "RF"};
-	String[] fridayCases = {"F	"}; //this will pick up last names that end with F well see how big that is.
-	public String[] getKeywords(){
+	static String[] tuesdayCases = {"	MT", "	T	",  "	TW", "TR	","TF	"};
+	static String[] wednesdayCases = {"	W	", "	MW", "	MTW", "	TW", "	WR", "	WRF	"};
+	static String[] thursdayCases = {"R	", "RF"};
+	static String[] fridayCases = {"F	"}; //this will pick up last names that end with F well see how big that is.
+	public static  String[] getKeywords(){
 		return regex;
 	}
-	public String[] getMondayCases(){
+	public static String[] getMondayCases(){
 		return mondayCases;
 	}
-	public String[] getTuesdayCases() {
+	public static String[] getTuesdayCases() {
 		return tuesdayCases;
 	}
-	public String[] getWednesdayCases() {
+	public static String[] getWednesdayCases() {
 		return wednesdayCases;
 	}
-	public String[] getThursdayCases() {
+	public static String[] getThursdayCases() {
 		return thursdayCases;
 	}
-	public String[] getFridayCases() {
+	public static String[] getFridayCases() {
 		return fridayCases;
 	}
 }

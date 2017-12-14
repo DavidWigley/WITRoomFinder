@@ -44,8 +44,7 @@ public class Search {
 	 * Method used to remove some of the words that cause conflicts in searching
 	 */
 	private void trimEntries(){
-		Keywords regex = new Keywords();
-		String[] keys = regex.getKeywords();
+		String[] keys = Keywords.getKeywords();
 		for (int i =0; i < conflictList.size(); i++){
 			for (int j =0; j < keys.length; j++){
 				conflictList.set(i, conflictList.get(i).toString().replace(keys[j], ""));
@@ -193,7 +192,6 @@ public class Search {
 	 */
 	private ArrayList trimUpToDay(ArrayList originalList) {
 		ArrayList trimmedList = new ArrayList();
-		Keywords keywords = new Keywords();
 		String[] currentSearch = null;
 		boolean shouldBreak = false;
 		final int DAYS_IN_WEEK =5;
@@ -203,15 +201,15 @@ public class Search {
 
 			for (int j=0; j < DAYS_IN_WEEK; j++) {
 				if (j==0) {
-					currentSearch = keywords.mondayCases;
+					currentSearch = Keywords.mondayCases;
 				}else if (j==1) {
-					currentSearch = keywords.tuesdayCases;
+					currentSearch = Keywords.tuesdayCases;
 				}else if (j==2) {
-					currentSearch = keywords.wednesdayCases;
+					currentSearch = Keywords.wednesdayCases;
 				}else if (j==3) {
-					currentSearch = keywords.thursdayCases;
+					currentSearch = Keywords.thursdayCases;
 				}else if (j==4) {
-					currentSearch = keywords.fridayCases;
+					currentSearch = Keywords.fridayCases;
 				}
 				for (int caseNum = 0; caseNum < currentSearch.length; caseNum++){
 					//I think I could technically replace this conditional with the first code block
